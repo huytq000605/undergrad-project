@@ -1,5 +1,9 @@
+import { Container } from "rsuite"
+
 export const MainContent = () => {
 	return (
-		<h1> HELLO </h1>
+		<Container>
+			<h1 style={{justifyContent: "center", display: "flex"}}>HELLO</h1>
+		</Container>
 	)
 }

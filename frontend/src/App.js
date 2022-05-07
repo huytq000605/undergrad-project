@@ -1,22 +1,24 @@
 import logo from "./logoEn.png";
-import {
-    CustomProvider,
-    FlexboxGrid,
-    Container,
-} from "rsuite";
+import { CustomProvider, FlexboxGrid, Container } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import { Sidebar } from "./Sidebar";
-import { MainContent } from "./MainContent"
+import { MainContent } from "./MainContent";
 
 function App() {
     return (
         <div>
-            <img src={logo} alt="HUST Logo" />
             <CustomProvider theme="light">
-                <FlexboxGrid style={{ "padding-top": "5px" }}>
+                <Container style={{style: "5px", backgroundColor: "#f2f2f5"}}>
+                    <img
+                        src={logo}
+                        alt="HUST Logo"
+                        style={{ height: "auto", width: "477px", padding: "5px" }}
+                    />
+									</Container>
+                <FlexboxGrid>
                     <FlexboxGrid.Item
-                        colspan={3}
-                        style={{ height: "calc(100vh - 85px)" }}
+                        colspan={4}
+                        style={{ height: "calc(100vh - 90px)" }}
                     >
                         <Container
                             className="sidebar-page"
@@ -25,9 +27,9 @@ function App() {
                             <Sidebar />
                         </Container>
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item colspan={21}>
+                    <FlexboxGrid.Item colspan={20}>
                         <Container>
-                          <MainContent />
+                            <MainContent />
                         </Container>
                     </FlexboxGrid.Item>
                 </FlexboxGrid>
