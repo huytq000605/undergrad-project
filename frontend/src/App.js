@@ -5,6 +5,7 @@ import { Sidebar } from "./Sidebar";
 import { Statistics } from "./Statistics";
 import { Routes, Route, Link } from "react-router-dom";
 import { Graph } from "./Graph";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (
