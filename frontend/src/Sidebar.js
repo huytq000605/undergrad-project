@@ -30,7 +30,7 @@ export const Sidebar = () => {
 		>
 			<Sidenav.Body style={{ height: "100%" }}>
 				<Nav style={{ height: "100%" }}>
-					<Nav.Item
+					{/* <Nav.Item
 						eventKey="1"
 						icon={<PageIcon />}
 						onClick={() => {
@@ -38,7 +38,7 @@ export const Sidebar = () => {
 						}}
 					>
 						Trang chủ
-					</Nav.Item>
+					</Nav.Item> */}
 					<Nav.Item
 						eventKey="2"
 						icon={<DashboardIcon />}
@@ -48,7 +48,7 @@ export const Sidebar = () => {
 					>
 						Thông số
 					</Nav.Item>
-					<Dropdown
+					{/* <Dropdown
 						eventKey="3"
 						title="Nhà máy điện"
 						icon={<SingleSourceIcon />}
@@ -65,9 +65,9 @@ export const Sidebar = () => {
 								);
 							}
 						)}
-					</Dropdown>
-					<Nav.Item eventKey="4" icon={<GearIcon />}>
-						Cài đặt
+					</Dropdown> */}
+					<Nav.Item eventKey="4" icon={<GearIcon />} onClick={() => {handleLink("graph")}}>
+						Đồ thị trực tuyến
 					</Nav.Item>
 				</Nav>
 			</Sidenav.Body>

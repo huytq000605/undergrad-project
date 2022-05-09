@@ -2,8 +2,9 @@ import logo from "./logoEn.png";
 import { CustomProvider, FlexboxGrid, Container } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import { Sidebar } from "./Sidebar";
-import { MainContent } from "./MainContent";
+import { Statistics } from "./Statistics";
 import { Routes, Route, Link } from "react-router-dom";
+import { Graph } from "./Graph";
 
 function App() {
     return (
@@ -28,13 +29,9 @@ function App() {
 						<FlexboxGrid.Item colspan={20}>
 							<Container>
 								<Routes>
-									<Route path="/" element={<MainContent />} />
-									<Route path="/home" element={() => {
-										return (
-											<h1>Hello</h1>
-										)
-									}} />
-									<Route path="/statistics" element={<MainContent />} />
+									<Route path="/" element={<Statistics />} />
+									<Route path="/statistics" element={<Statistics />} />
+									<Route path="/graph" element={<Graph />} />
 								</Routes>
 							</Container>
 						</FlexboxGrid.Item>
