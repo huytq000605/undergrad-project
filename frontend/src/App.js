@@ -7,26 +7,40 @@ import { Routes, Route, Link } from "react-router-dom";
 import { Graph } from "./Graph";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./Header";
+import { useRef, useEffect, useCallback, useState } from "react"
 
 function App() {
+	const onContentRefChange = useCallback((ref) => {
+		setContentRef(ref)
+	}, [])
+	const onSidebarRefChange = useCallback((ref) => {
+		setSidebarRef(ref)
+	}, [])
+	const [contentRef, setContentRef] = useState(null)
+	const [sidebarRef, setSidebarRef] = useState(null)
+
+	useEffect(() => {
+		if(contentRef && sidebarRef) {
+			sidebarRef.style.height = `${contentRef.clientHeight}px`
+			sidebarRef.style.minHeight = `calc(100vh - 90px)`
+		}
+		// sidebarRef.current.height = contentRef.
+	}, [contentRef, sidebarRef])
+
+	useEffect(() => {
+
+	}, [])
     return (
 			<div>
 				<CustomProvider theme="light">
-					{/* <Container ref={headerRef} style={{ style: "5px", backgroundColor: "#f2f2f5" }}>
-						<img
-							src={logo}
-							alt="HUST Logo"
-							style={{ height: "auto", width: "477px", padding: "5px" }}
-						/>
-					</Container> */}
 					<Header />
-					<FlexboxGrid>
+					<FlexboxGrid ref={onContentRefChange}>
 						<FlexboxGrid.Item
+							ref={onSidebarRefChange}
 							colspan={4}
-							// style={{ height: "calc(100vh - 90px)" }}
-							style={{ maxHeight: '100vh' }}
+							style={{ display: "flex" }}
 						>
-							<Container className="sidebar-page" style={{ height: "calc(100vh - 90px)" }}>
+							<Container className="sidebar-page" style={{ display: "flex", height: "100%" }}>
 								<Sidebar />
 							</Container>
 						</FlexboxGrid.Item>

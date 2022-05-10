@@ -7,7 +7,7 @@ export const Statistics = () => {
 
 	return (
 		<Container>
-			<div style={{ maxHeight: "100%", overflow: "hidden" }}>
+			{/* <div style={{ maxHeight: "100%", overflow: "hidden" }}> */}
 				<GridContainer fluid>
 					<Row>
 						{names.map((name, index) => (
@@ -17,7 +17,7 @@ export const Statistics = () => {
 						))}
 					</Row>
 				</GridContainer>
-			</div>
+			{/* </div> */}
 		</Container>
 	);
 };
