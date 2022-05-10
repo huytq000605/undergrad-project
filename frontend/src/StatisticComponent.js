@@ -9,24 +9,24 @@ import {
 
 export const StatisticComponent = ({name}) => {
 	return (
-			<Card style={{ margin: "20px" }}>
+			<Card className="mx-2 my-3" style={{ fontSize: '12px'}}>
 				<Card.Header style={{ width: "100%", textTransform: "uppercase" }}>
 					{`Các thông số pha ${name}`}
 				</Card.Header>
-				<Card.Body>
+				<Card.Body style={{ padding: '10px' }}>
 					<Form>
 						<GridContainer fluid>
 							<Row>
 								<Col sm={12} md={6}>
 									<Form.Group
 										as={Row}
-										className="mb-3"
+										className="mb-1"
 										controlId="formPlaintextEmail"
 									>
-										<Form.Label column sm="7" className="text-end">
+										<Form.Label column sm="6" className="text-end">
 											{`Dòng điện pha ${name}`}
 										</Form.Label>
-										<Col sm="2">
+										<Col sm="3">
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
@@ -39,13 +39,13 @@ export const StatisticComponent = ({name}) => {
 									</Form.Group>
 									<Form.Group
 										as={Row}
-										className="mb-3"
+										className="mb-1"
 										controlId="formPlaintextEmail"
 									>
-										<Form.Label column sm="7" className="text-end">
+										<Form.Label column sm="6" className="text-end">
 											{`Công suất điều khiển pha ${name}`}
 										</Form.Label>
-										<Col sm="2">
+										<Col sm="3">
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
@@ -58,13 +58,13 @@ export const StatisticComponent = ({name}) => {
 									</Form.Group>
 									<Form.Group
 										as={Row}
-										className="mb-3"
+										className="mb-1"
 										controlId="formPlaintextEmail"
 									>
-										<Form.Label column sm="7" className="text-end">
+										<Form.Label column sm="6" className="text-end">
 											{`Cos alpha pha ${name}`}
 										</Form.Label>
-										<Col sm="2">
+										<Col sm="3">
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
@@ -79,13 +79,13 @@ export const StatisticComponent = ({name}) => {
 								<Col sm={12} md={6}>
 								<Form.Group
 										as={Row}
-										className="mb-3"
+										className="mb-1"
 										controlId="formPlaintextEmail"
 									>
-										<Form.Label column sm="7" className="text-end">
+										<Form.Label column sm="6" className="text-end">
 											{`Công suất hiệu dụng pha ${name}`}
 										</Form.Label>
-										<Col sm="2">
+										<Col sm="3">
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
@@ -98,13 +98,13 @@ export const StatisticComponent = ({name}) => {
 									</Form.Group>
 									<Form.Group
 										as={Row}
-										className="mb-3"
+										className="mb-1"
 										controlId="formPlaintextEmail"
 									>
-										<Form.Label column sm="7" className="text-end">
+										<Form.Label column sm="6" className="text-end">
 											{`Công suất phản kháng pha ${name}`}
 										</Form.Label>
-										<Col sm="2">
+										<Col sm="3">
 											<Form.Control
 												className="px-1 py-1"
 												readOnly

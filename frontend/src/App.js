@@ -1,5 +1,4 @@
-import { useRef, useEffect } from 'react';
-import logo from "./logoEn.png";
+
 import { CustomProvider, FlexboxGrid, Container } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import { Sidebar } from "./Sidebar";
@@ -10,10 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./Header";
 
 function App() {
-		const headerRef = useRef();
-
-		console.log(headerRef)
-
     return (
 			<div>
 				<CustomProvider theme="light">
@@ -24,7 +19,7 @@ function App() {
 							style={{ height: "auto", width: "477px", padding: "5px" }}
 						/>
 					</Container> */}
-					<Header ref={headerRef} />
+					<Header />
 					<FlexboxGrid>
 						<FlexboxGrid.Item
 							colspan={4}
