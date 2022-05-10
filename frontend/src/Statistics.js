@@ -7,17 +7,15 @@ export const Statistics = () => {
 
 	return (
 		<Container>
-			{/* <div style={{ maxHeight: "100%", overflow: "hidden" }}> */}
 				<GridContainer fluid>
 					<Row>
 						{names.map((name, index) => (
-							<Col key={index} xs={12} md={name !== "Other" ? 12 : 6}>
+							<Col key={index} xs={12} md={12}>
 								<StatisticComponent name={name} />
 							</Col>
 						))}
 					</Row>
 				</GridContainer>
-			{/* </div> */}
 		</Container>
 	);
 };

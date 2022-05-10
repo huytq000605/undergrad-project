@@ -34,7 +34,6 @@ function App() {
 					<FlexboxGrid.Item
 						ref={onSidebarRefChange}
 						colspan={4}
-						style={{ display: "flex" }}
 					>
 						<Container
 							className="sidebar-page"
