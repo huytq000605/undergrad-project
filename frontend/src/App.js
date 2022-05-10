@@ -21,9 +21,10 @@ function App() {
 					<FlexboxGrid>
 						<FlexboxGrid.Item
 							colspan={4}
-							style={{ height: "calc(100vh - 90px)" }}
+							// style={{ height: "calc(100vh - 90px)" }}
+							style={{ height: "100vh" }}
 						>
-							<Container className="sidebar-page" style={{ height: "100%" }}>
+							<Container className="sidebar-page" style={{ height: "100vh" }}>
 								<Sidebar />
 							</Container>
 						</FlexboxGrid.Item>
