@@ -9,7 +9,7 @@ import {
 
 export const StatisticComponent = ({name}) => {
 	return (
-			<Card className="mx-2 my-3" style={{ fontSize: '12px'}}>
+			<Card className="mx-2 mt-3" style={{ fontSize: '12px'}}>
 				<Card.Header style={{ width: "100%", textTransform: "uppercase" }}>
 					{`Các thông số pha ${name}`}
 				</Card.Header>
