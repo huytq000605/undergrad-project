@@ -1,9 +1,11 @@
 import { Container } from "rsuite";
 import { Container as GridContainer, Row, Col } from "react-bootstrap";
-import { StatisticComponent } from "./StatisticComponent";
+import { StatisticComponent } from "./Statistics/StatisticComponent";
+import { EnergyConsume } from "./Statistics/EnergyConsume";
+import { Electric } from "./Statistics/Electric";
 
 export const Statistics = () => {
-	const names = ["A", "B", "C", "Other", "Other"];
+	const names = ["A", "B", "C"];
 
 	return (
 		<Container>
@@ -14,6 +16,12 @@ export const Statistics = () => {
 								<StatisticComponent name={name} />
 							</Col>
 						))}
+						<Col xs={12} md={12}>
+							<EnergyConsume />
+						</Col>
+						<Col xs={12} md={12}>
+							<Electric />
+						</Col>
 					</Row>
 				</GridContainer>
 		</Container>

@@ -1,4 +1,3 @@
-import { Container } from "rsuite";
 import {
 	Container as GridContainer,
 	Card,
