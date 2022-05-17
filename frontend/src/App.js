@@ -2,7 +2,6 @@ import {
 	CustomProvider,
 	FlexboxGrid,
 	Container,
-	Badge,
 	Button,
 	Toggle,
 } from "rsuite";
@@ -17,13 +16,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Header";
 import { useEffect, useCallback, useState } from "react";
 
-const activeKeyToString = {
-	1: "Trang chủ",
-	3: "Nhà máy điện",
-	4: "Đồ thị trực tuyến",
-	5: "Cài đặt",
-};
-
 function App() {
 	const onContentRefChange = useCallback((ref) => {
 		setContentRef(ref);
@@ -34,7 +26,7 @@ function App() {
 	const [contentRef, setContentRef] = useState(null);
 	const [sidebarRef, setSidebarRef] = useState(null);
 	const [sidebarExpanded, setSidebarExpanded] = useState(true);
-	const [activeKey, setActiveKey] = useState("1");
+	const [activeKey, setActiveKey] = useState("Trang chủ");
 
 	useEffect(() => {
 		if (contentRef && sidebarRef) {
@@ -60,7 +52,7 @@ function App() {
 					</FlexboxGrid.Item>
 					<FlexboxGrid.Item colspan={sidebarExpanded ? 20 : 23}>
 						<GridContainer style={{"margin-left": "0px", "margin-right": "0px"}}>
-								<Button style={{minWidth: "150px"}}>New Message</Button>
+								<Button style={{minWidth: "150px"}}>{activeKey}</Button>
 						</GridContainer>
 					</FlexboxGrid.Item>
 				</FlexboxGrid>

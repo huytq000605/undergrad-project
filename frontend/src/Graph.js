@@ -1,5 +1,9 @@
+import { Container } from "react-bootstrap";
+
 export const Graph = () => {
 	return (
-		<h1>Graph</h1>
+		<Container>
+			Graph
+		</Container>
 	)
 }

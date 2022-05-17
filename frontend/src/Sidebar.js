@@ -19,7 +19,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 	return (
 		<div style={{ height: "100%", display: "flex", flexDirection:"column" }}>
 			<Sidenav
-				defaultOpenKeys={["3", "4"]}
+				defaultOpenKeys={["Nhà máy điện", "4"]}
 				collapsible
 				expanded={expanded}
 				activeKey="1"
@@ -33,7 +33,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 				<Sidenav.Body style={{ height: "100%" }}>
 					<Nav style={{ height: "100%" }}>
 						<Nav.Item
-							eventKey="1"
+							eventKey="Trang chủ"
 							icon={<PageIcon />}
 							onClick={() => {
 								handleLink("home");
@@ -48,7 +48,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 						Thông số
 					</Nav.Item> */}
 						<Dropdown
-							eventKey="3"
+							eventKey="Nhà máy điện"
 							title="Nhà máy điện"
 							icon={<SingleSourceIcon />}
 							trigger="click"
@@ -57,7 +57,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 								(name, idx) => {
 									return (
 										<Dropdown.Item
-											eventKey={`3-${idx + 1}`}
+											eventKey={`Nhà máy quận ${name}`}
 											icon={<OperatePeopleIcon />}
 											onClick={() => {
 												handleLink("statistics");
@@ -70,7 +70,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 							)}
 						</Dropdown>
 						<Nav.Item
-							eventKey="4"
+							eventKey="Đồ thị trực tuyến"
 							icon={<DashboardIcon />}
 							onClick={() => {
 								handleLink("graph");
@@ -79,7 +79,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 							Đồ thị trực tuyến
 						</Nav.Item>
 						<Nav.Item
-							eventKey="5"
+							eventKey="Cài đặt"
 							icon={<GearIcon />}
 							onClick={() => {
 								handleLink("graph");
