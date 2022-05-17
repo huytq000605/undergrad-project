@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "dependencies": {
+    "concurrently": "^7.2.0"
+  },
+  "scripts": {
+    "client": "yarn workspace frontend start",
+    "server": "yarn workspace backend start",
+    "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\""
+  }
+}

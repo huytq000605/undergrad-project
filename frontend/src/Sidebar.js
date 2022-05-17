@@ -21,11 +21,11 @@ export const Sidebar = ({expanded, setExpanded}) => {
 	return (
 		<div style={{ height: "100%", display: "flex", flexDirection:"column" }}>
 		<Toggle
-			size="sm"
+			size="md"
 			onChange={setExpanded}
 			checked={expanded}
-			checkedChildren="Expanded"
-			unCheckedChildren="Collapsed"
+			checkedChildren="Thu gọn"
+			unCheckedChildren="Mở rộng"
 		/>
 			<Sidenav
 				defaultOpenKeys={["3", "4"]}

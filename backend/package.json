@@ -5,12 +5,18 @@
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "knex": "^0.95.15",
+    "knex-cli": "^1.0.2",
     "mqtt": "^4.2.8",
     "mysql": "^2.18.1"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js",
+    "knex": "npx babel-node node_modules/.bin/knex"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
