@@ -7,7 +7,7 @@ import PageIcon from "@rsuite/icons/Page";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react"
 
-export const Sidebar = ({expanded, setExpanded}) => {
+export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 	const navigate = useNavigate();
 	const handleLink = useCallback(
 		(link) => {
@@ -16,17 +16,8 @@ export const Sidebar = ({expanded, setExpanded}) => {
 		[navigate]
 	);
 
-	const [activeKey, setActiveKey] = useState('1');
-
 	return (
 		<div style={{ height: "100%", display: "flex", flexDirection:"column" }}>
-		<Toggle
-			size="md"
-			onChange={setExpanded}
-			checked={expanded}
-			checkedChildren="Thu gọn"
-			unCheckedChildren="Mở rộng"
-		/>
 			<Sidenav
 				defaultOpenKeys={["3", "4"]}
 				collapsible

@@ -16,7 +16,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "knex": "npx babel-node node_modules/.bin/knex"
+    "up": "node database_init.js",
+    "down": "node database_deinit.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

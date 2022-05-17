@@ -1,13 +1,28 @@
-import { CustomProvider, FlexboxGrid, Container } from "rsuite";
+import {
+	CustomProvider,
+	FlexboxGrid,
+	Container,
+	Badge,
+	Button,
+	Toggle,
+} from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import 'rsuite/styles/index.less';
+import "rsuite/styles/index.less";
 import { Sidebar } from "./Sidebar";
 import { Statistics } from "./Statistics";
 import { Routes, Route, Link } from "react-router-dom";
+import { Container as GridContainer, Row, Col } from "react-bootstrap";
 import { Graph } from "./Graph";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Header";
 import { useEffect, useCallback, useState } from "react";
+
+const activeKeyToString = {
+	1: "Trang chủ",
+	3: "Nhà máy điện",
+	4: "Đồ thị trực tuyến",
+	5: "Cài đặt",
+};
 
 function App() {
 	const onContentRefChange = useCallback((ref) => {
@@ -19,6 +34,7 @@ function App() {
 	const [contentRef, setContentRef] = useState(null);
 	const [sidebarRef, setSidebarRef] = useState(null);
 	const [sidebarExpanded, setSidebarExpanded] = useState(true);
+	const [activeKey, setActiveKey] = useState("1");
 
 	useEffect(() => {
 		if (contentRef && sidebarRef) {
@@ -32,7 +48,23 @@ function App() {
 		<div>
 			<CustomProvider theme="light">
 				<Header />
-				<FlexboxGrid ref={onContentRefChange}>
+				<FlexboxGrid style={{ "padding-top": "5px" }}>
+					<FlexboxGrid.Item colspan={sidebarExpanded ? 4 : 1}>
+						<Toggle
+							size={sidebarExpanded ? "lg" : "md"}
+							onChange={setSidebarExpanded}
+							checked={sidebarExpanded}
+							checkedChildren="Thu gọn"
+							unCheckedChildren="Mở rộng"
+						/>
+					</FlexboxGrid.Item>
+					<FlexboxGrid.Item colspan={sidebarExpanded ? 20 : 23}>
+						<GridContainer style={{"margin-left": "0px", "margin-right": "0px"}}>
+								<Button style={{minWidth: "150px"}}>New Message</Button>
+						</GridContainer>
+					</FlexboxGrid.Item>
+				</FlexboxGrid>
+				<FlexboxGrid ref={onContentRefChange} style={{"padding-top": "5px"}}>
 					<FlexboxGrid.Item
 						ref={onSidebarRefChange}
 						colspan={sidebarExpanded ? 4 : 1}
@@ -41,17 +73,21 @@ function App() {
 							className="sidebar-page"
 							style={{ display: "flex", height: "100%" }}
 						>
-							<Sidebar expanded={sidebarExpanded} setExpanded={setSidebarExpanded} style={{ display: "flex" }} />
+							<Sidebar
+								expanded={sidebarExpanded}
+								setExpanded={setSidebarExpanded}
+								style={{ display: "flex" }}
+								activeKey={activeKey}
+								setActiveKey={setActiveKey}
+							/>
 						</Container>
 					</FlexboxGrid.Item>
 					<FlexboxGrid.Item colspan={sidebarExpanded ? 20 : 23}>
-						<Container>
-							<Routes>
-								<Route path="/" element={<Statistics />} />
-								<Route path="/statistics" element={<Statistics />} />
-								<Route path="/graph" element={<Graph />} />
-							</Routes>
-						</Container>
+						<Routes>
+							<Route path="/" element={<Statistics />} />
+							<Route path="/statistics" element={<Statistics />} />
+							<Route path="/graph" element={<Graph />} />
+						</Routes>
 					</FlexboxGrid.Item>
 				</FlexboxGrid>
 			</CustomProvider>

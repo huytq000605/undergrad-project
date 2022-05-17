@@ -32,10 +32,48 @@ const knex = client({
 	},
 });
 
-await knex.schema.createTable('chi_so', function (table) {
+await knex.schema.createTable('chi_so_pha_a', function (table) {
   table.increments();
 	table.specificType('dong_dien', 'double precision')
+	table.specificType('cong_suat_dieu_khien', 'double precision')
+	table.specificType('cos_alpha', 'double precision')
+	table.specificType('cong_suat_hieu_dung', 'double precision')
+	table.specificType('cong_suat_phan_khang', 'double precision')
 	table.specificType('dien_ap', 'double precision')
+  table.timestamps();
+})
+
+await knex.schema.createTable('chi_so_pha_b', function (table) {
+  table.increments();
+	table.specificType('dong_dien', 'double precision')
+	table.specificType('cong_suat_dieu_khien', 'double precision')
+	table.specificType('cos_alpha', 'double precision')
+	table.specificType('cong_suat_hieu_dung', 'double precision')
+	table.specificType('cong_suat_phan_khang', 'double precision')
+	table.specificType('dien_ap', 'double precision')
+  table.timestamps();
+})
+
+await knex.schema.createTable('chi_so_pha_c', function (table) {
+  table.increments();
+	table.specificType('dong_dien', 'double precision')
+	table.specificType('cong_suat_dieu_khien', 'double precision')
+	table.specificType('cos_alpha', 'double precision')
+	table.specificType('cong_suat_hieu_dung', 'double precision')
+	table.specificType('cong_suat_phan_khang', 'double precision')
+	table.specificType('dien_ap', 'double precision')
+  table.timestamps();
+})
+
+await knex.schema.createTable('dien_nang', function (table) {
+  table.increments();
+	table.specificType('dien_nang_tieu_thu', 'double precision')
+	table.specificType('cong_suat_bieu_kien', 'double precision')
+	table.specificType('cong_suat_bieu_kien_tong', 'double precision')
+	table.specificType('cong_suat_phan_khang', 'double precision')
+	table.specificType('cong_suat_phan_khang_tong', 'double precision')
+	table.specificType('cong_suat_hieu_dung_tong', 'double precision')
+	table.specificType('tan_so', 'double precision')
   table.timestamps();
 })
 

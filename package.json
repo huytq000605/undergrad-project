@@ -10,6 +10,8 @@
   "scripts": {
     "client": "yarn workspace frontend start",
     "server": "yarn workspace backend start",
+    "up": "yarn workspace backend up",
+    "down": "yarn workspace backend down",
     "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\""
   }
 }
