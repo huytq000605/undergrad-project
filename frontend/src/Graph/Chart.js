@@ -18,13 +18,6 @@ class Chart extends Component{
   }
 
   render(){
-    console.log(this.state.chartData);
-    console.log(this.state.chartData.currentData);
-    console.log(this.state.chartData.currentData);
-    console.log(this.state.chartData.currentData);
-    console.log(this.props.location);
-    console.log(this.props.displayLegend);
-    console.log(this.props.legendPosition);
     return (
       <div className="chart">
         <Line
