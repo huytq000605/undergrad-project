@@ -28,19 +28,22 @@ export const Graph = () => {
 			  label: 'Pha A',
 			  data: labels.map(() => getRandomInt(1000)),
 			  borderColor: 'rgb(255, 99, 132)',
-			  backgroundColor: 'rgba(0, 0, 0, 0)',
+			  backgroundColor: 'rgb(255, 99, 132)',
+			  fill: false,
 			},
 			{
 			  label: 'Pha B',
 			  data: labels.map(() => getRandomInt(1000)),
 			  borderColor: 'rgb(53, 162, 235)',
-			  backgroundColor: 'rgba(0, 0, 0, 0)',
+			  backgroundColor: 'rgb(53, 162, 235)',
+			  fill: false,
 			},
 			{
 			  label: 'Pha C',
 			  data: labels.map(() => getRandomInt(1000)),
 			  borderColor: 'rgb(53, 235, 59)',
-			  backgroundColor: 'rgba(0, 0, 0, 0)',
+			  backgroundColor: 'rgb(53, 235, 59)',
+			  fill: false,
 			},
 		  ]
 		},
@@ -51,19 +54,22 @@ export const Graph = () => {
 			  label: 'Pha A',
 			  data: labels.map(() => getRandomInt(1000)),
 			  borderColor: 'rgb(255, 99, 132)',
-			  backgroundColor: 'rgba(0, 0, 0, 0)',
+			  backgroundColor: 'rgb(255, 99, 132)',
+			  fill: false,
 			},
 			{
 			  label: 'Pha B',
 			  data: labels.map(() => getRandomInt(1000)),
 			  borderColor: 'rgb(53, 162, 235)',
-			  backgroundColor: 'rgba(0, 0, 0, 0)',
+			  backgroundColor: 'rgb(53, 162, 235)',
+			  fill: false,
 			},
 			{
 			  label: 'Pha C',
 			  data: labels.map(() => getRandomInt(1000)),
 			  borderColor: 'rgb(53, 235, 59)',
-			  backgroundColor: 'rgba(0, 0, 0, 0)',
+			  backgroundColor: 'rgb(53, 235, 59)',
+			  fill: false,
 			},
 		  ]
 		},
@@ -74,7 +80,8 @@ export const Graph = () => {
 			  label: 'Nhiệt độ tủ điện',
 			  data: labels.map(() => getRandomInt(1000)),
 			  borderColor: 'rgb(255, 0, 0)',
-			  backgroundColor: 'rgba(0, 0, 0, 0)',
+			  backgroundColor: 'rgb(255, 0, 0)',
+			  fill: false,
 			}
 		  ]
 		}
