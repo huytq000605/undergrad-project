@@ -10,8 +10,9 @@ import { useCallback, useState } from "react"
 export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 	const navigate = useNavigate();
 	const handleLink = useCallback(
-		(link) => {
-			navigate(`/${link}`, { replace: true });
+		(link, data) => {
+			console.log(data);
+			navigate(`/${link}`, { replace: true, state: data });
 		},
 		[navigate]
 	);
@@ -69,20 +70,33 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 								}
 							)}
 						</Dropdown>
-						<Nav.Item
+						<Dropdown
 							eventKey="Đồ thị trực tuyến"
+							title="Đồ thị trực tuyến"
 							icon={<DashboardIcon />}
-							onClick={() => {
-								handleLink("graph");
-							}}
+							trigger="click"
 						>
-							Đồ thị trực tuyến
-						</Nav.Item>
+							{["Đống Đa", "Hai Bà Trưng", "Ba Đình", "Hoàn Kiếm"].map(
+								(name, idx) => {
+									return (
+										<Dropdown.Item
+											eventKey={`Đồ thị nhà máy quận ${name}`}
+											icon={<OperatePeopleIcon />}
+											onClick={() => {
+												handleLink("graph", { location: `quận ${name}` });
+											}}
+										>
+											Nhà máy quận {`${name}`}
+										</Dropdown.Item>
+									);
+								}
+							)}
+						</Dropdown>
 						<Nav.Item
 							eventKey="Cài đặt"
 							icon={<GearIcon />}
 							onClick={() => {
-								handleLink("graph");
+								handleLink("home");
 							}}
 						>
 							Cài đặt
