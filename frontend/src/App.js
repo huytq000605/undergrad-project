@@ -40,7 +40,7 @@ function App() {
 		<div>
 			<CustomProvider theme="light">
 				<Header />
-				<FlexboxGrid style={{ "padding-top": "5px" }}>
+				<FlexboxGrid style={{ "paddingTop": "5px" }}>
 					<FlexboxGrid.Item colspan={sidebarExpanded ? 4 : 1}>
 						<Toggle
 							size={sidebarExpanded ? "lg" : "md"}
@@ -51,12 +51,12 @@ function App() {
 						/>
 					</FlexboxGrid.Item>
 					<FlexboxGrid.Item colspan={sidebarExpanded ? 20 : 23}>
-						<GridContainer style={{"margin-left": "0px", "margin-right": "0px"}}>
+						<GridContainer style={{"marginLeft": "0px", "marginRight": "0px"}}>
 								<Button style={{minWidth: "150px"}}>{activeKey}</Button>
 						</GridContainer>
 					</FlexboxGrid.Item>
 				</FlexboxGrid>
-				<FlexboxGrid ref={onContentRefChange} style={{"padding-top": "5px"}}>
+				<FlexboxGrid ref={onContentRefChange} style={{"paddingTop": "5px"}}>
 					<FlexboxGrid.Item
 						ref={onSidebarRefChange}
 						colspan={sidebarExpanded ? 4 : 1}

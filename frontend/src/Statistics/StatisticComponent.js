@@ -16,6 +16,7 @@ export const StatisticComponent = ({name}) => {
 			const json = await res.json()
 			setData(json)
 		}
+		getResponse()
 		const interval = setInterval(() => {
 			getResponse()
 		}, 5000)
@@ -45,8 +46,7 @@ export const StatisticComponent = ({name}) => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
-												value={data['dong_dien']}
+												value={data['dong_dien'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -65,8 +65,7 @@ export const StatisticComponent = ({name}) => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
-												value={data['cong_suat_dieu_khien']}
+												value={data['cong_suat_dieu_khien'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -85,8 +84,7 @@ export const StatisticComponent = ({name}) => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
-												value={data['cos_alpha']}
+												value={data['cos_alpha'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -107,8 +105,7 @@ export const StatisticComponent = ({name}) => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
-												value={data['cong_suat_hieu_dung']}
+												value={data['cong_suat_hieu_dung'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -127,8 +124,7 @@ export const StatisticComponent = ({name}) => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
-												value={data['cong_suat_phan_khang']}
+												value={data['cong_suat_phan_khang'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">

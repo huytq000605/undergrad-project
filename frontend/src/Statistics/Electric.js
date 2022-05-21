@@ -5,8 +5,25 @@ import {
 	Row,
 	Col,
 } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { api } from "../shared/api"
 
 export const Electric = () => {
+	const [data, setData] = useState({})
+	useEffect(() => {
+		const getResponse = async () => {
+			const res = await api("3-pha")
+			const json = await res.json()
+			setData(json)
+		}
+		getResponse()
+		const interval = setInterval(() => {
+			getResponse()
+		}, 5000)
+
+		return () => clearInterval(interval)
+	}, [])
+
 	return (
 			<Card className="mx-1 mt-2">
 				<Card.Header className="px-1 py-1" style={{ width: "100%", textTransform: "uppercase" }}>
@@ -29,7 +46,7 @@ export const Electric = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['pha_a'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -48,7 +65,7 @@ export const Electric = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['pha_b'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -69,7 +86,7 @@ export const Electric = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['pha_c'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -88,7 +105,7 @@ export const Electric = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['tan_so'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">

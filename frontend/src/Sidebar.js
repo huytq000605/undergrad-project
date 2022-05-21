@@ -21,7 +21,6 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 		<div style={{ height: "100%", display: "flex", flexDirection:"column" }}>
 			<Sidenav
 				defaultOpenKeys={["Nhà máy điện", "4"]}
-				collapsible
 				expanded={expanded}
 				activeKey="1"
 				style={{
@@ -58,6 +57,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 								(name, idx) => {
 									return (
 										<Dropdown.Item
+											key={idx}
 											eventKey={`Nhà máy quận ${name}`}
 											icon={<OperatePeopleIcon />}
 											onClick={() => {
@@ -81,6 +81,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 									return (
 										<Dropdown.Item
 											eventKey={`Đồ thị nhà máy quận ${name}`}
+											key={idx}
 											icon={<OperatePeopleIcon />}
 											onClick={() => {
 												handleLink("graph", { location: `quận ${name}` });
