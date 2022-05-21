@@ -6,7 +6,10 @@ class Chart extends Component{
   constructor(props){
     super(props);
     this.state = {
-      chartData:props.chartData
+      chartData:props.chartData,
+      currentData: props.chartData.currentData,
+      voltageData: props.chartData.voltageData,
+      tempData: props.chartData.tempData,
     }
   }
 
@@ -17,11 +20,96 @@ class Chart extends Component{
     location:'City'
   }
 
+  componentDidMount() {
+    console.log('componentDidMount');
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+    const { labels } = this.state.currentData;
+
+    this.interval = setInterval(() => {
+      /* Call the Polling API */
+      const newState = {
+        currentData:{
+          labels,
+          datasets: [
+          {
+            label: 'Pha A',
+            data: labels.map(() => getRandomInt(1000)),
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(255, 99, 132)',
+            fill: false,
+          },
+          {
+            label: 'Pha B',
+            data: labels.map(() => getRandomInt(1000)),
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgb(53, 162, 235)',
+            fill: false,
+          },
+          {
+            label: 'Pha C',
+            data: labels.map(() => getRandomInt(1000)),
+            borderColor: 'rgb(53, 235, 59)',
+            backgroundColor: 'rgb(53, 235, 59)',
+            fill: false,
+          },
+          ]
+        },
+        voltageData:{
+          labels,
+          datasets: [
+          {
+            label: 'Pha A',
+            data: labels.map(() => getRandomInt(1000)),
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(255, 99, 132)',
+            fill: false,
+          },
+          {
+            label: 'Pha B',
+            data: labels.map(() => getRandomInt(1000)),
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgb(53, 162, 235)',
+            fill: false,
+          },
+          {
+            label: 'Pha C',
+            data: labels.map(() => getRandomInt(1000)),
+            borderColor: 'rgb(53, 235, 59)',
+            backgroundColor: 'rgb(53, 235, 59)',
+            fill: false,
+          },
+          ]
+        },
+        tempData:{
+          labels,
+          datasets: [
+          {
+            label: 'Nhiệt độ tủ điện',
+            data: labels.map(() => getRandomInt(1000)),
+            borderColor: 'rgb(255, 0, 0)',
+            backgroundColor: 'rgb(255, 0, 0)',
+            fill: false,
+          }
+          ]
+        }
+      }
+      this.setState({ 
+        chartData: newState,
+        currentData: newState.currentData,
+        voltageData: newState.voltageData,
+        tempData: newState.tempData,
+      })
+    }, 2000);
+  }
+
   render(){
     return (
       <div className="chart">
         <Line
-          data={this.state.chartData.currentData}
+          data={this.state.currentData}
           options={{
             title:{
               display:this.props.displayTitle,
@@ -36,7 +124,7 @@ class Chart extends Component{
         />
 
         <Line
-          data={this.state.chartData.voltageData}
+          data={this.state.voltageData}
           options={{
             title:{
               display:this.props.displayTitle,
@@ -51,7 +139,7 @@ class Chart extends Component{
         />
 
         <Line
-          data={this.state.chartData.tempData}
+          data={this.state.tempData}
           options={{
             title:{
               display:this.props.displayTitle,

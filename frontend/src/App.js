@@ -9,7 +9,7 @@ import "rsuite/dist/rsuite.min.css";
 import "rsuite/styles/index.less";
 import { Sidebar } from "./Sidebar";
 import { Statistics } from "./Statistics";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { Container as GridContainer, Row, Col } from "react-bootstrap";
 import { Graph } from "./Graph";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -78,7 +78,7 @@ function App() {
 						<Routes>
 							<Route path="/" element={<Statistics />} />
 							<Route path="/statistics" element={<Statistics />} />
-							<Route path="/graph" element={<Graph />} />
+							<Route path="/graph" element={<Graph state={useLocation().state}/>} />
 						</Routes>
 					</FlexboxGrid.Item>
 				</FlexboxGrid>

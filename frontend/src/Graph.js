@@ -1,10 +1,7 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Chart from './Graph/Chart';
-import { StatisticComponent } from "./Statistics/StatisticComponent";
-import { EnergyConsume } from "./Statistics/EnergyConsume";
-import { Electric } from "./Statistics/Electric";
 
-export const Graph = () => {
+export const Graph = (props) => {
 	const labels = (() => {
 		let labels = [];
 		let time = new Date();
@@ -86,12 +83,14 @@ export const Graph = () => {
 		  ]
 		}
 	}
-	console.log(state);
+	console.log("hahahahah");
+	console.log(props);
 	return (
 		<Container>
 			<div className="Graph">
-        		<Chart chartData={state} location="Quận Đống Đa" legendPosition="bottom"/>
+        		<Chart chartData={state} location={props.state.location} legendPosition="bottom"/>
       		</div>
 		</Container>
+		
 	)
 }
