@@ -5,8 +5,24 @@ import {
 	Row,
 	Col,
 } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { api } from "../shared/api"
 
 export const StatisticComponent = ({name}) => {
+	const [data, setData] = useState({})
+	useEffect(() => {
+		const getResponse = async () => {
+			const res = await api(`pha-${name}`)
+			const json = await res.json()
+			setData(json)
+		}
+		const interval = setInterval(() => {
+			getResponse()
+		}, 5000)
+
+		return () => clearInterval(interval)
+	}, [name])
+
 	return (
 			<Card className="mx-1 mt-2">
 				<Card.Header className="px-1 py-1" style={{ width: "100%", textTransform: "uppercase" }}>
@@ -30,6 +46,7 @@ export const StatisticComponent = ({name}) => {
 												className="px-1 py-1"
 												readOnly
 												defaultValue="0.00"
+												value={data['dong_dien']}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -49,6 +66,7 @@ export const StatisticComponent = ({name}) => {
 												className="px-1 py-1"
 												readOnly
 												defaultValue="0.00"
+												value={data['cong_suat_dieu_khien']}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -68,6 +86,7 @@ export const StatisticComponent = ({name}) => {
 												className="px-1 py-1"
 												readOnly
 												defaultValue="0.00"
+												value={data['cos_alpha']}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -89,6 +108,7 @@ export const StatisticComponent = ({name}) => {
 												className="px-1 py-1"
 												readOnly
 												defaultValue="0.00"
+												value={data['cong_suat_hieu_dung']}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -108,6 +128,7 @@ export const StatisticComponent = ({name}) => {
 												className="px-1 py-1"
 												readOnly
 												defaultValue="0.00"
+												value={data['cong_suat_phan_khang']}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
