@@ -6,7 +6,7 @@ export const Graph = (props) => {
 		let labels = [];
 		let time = new Date();
 		while (labels.length <= 30) {
-		  labels.push(time);
+		  labels.push(`${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`);
 		  console.log(time);
 		  time = new Date(time.getTime() - 600000);
 		}
