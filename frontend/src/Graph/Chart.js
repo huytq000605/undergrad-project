@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 // eslint-disable-next-line
 import { Line } from 'react-chartjs-2';
-
+import pollingAPI from './Polling';
 class Chart extends Component{
   constructor(props){
     super(props);
-    this.state = {
-      chartData:props.chartData,
-      currentData: props.chartData.currentData,
-      voltageData: props.chartData.voltageData,
-      tempData: props.chartData.tempData,
-    }
+    this.state = {}
   }
 
   static defaultProps = {
@@ -20,89 +15,28 @@ class Chart extends Component{
     location:'City'
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log('componentDidMount');
+    let newState = await pollingAPI();
+    // console.log(newState);
+    this.setState({ 
+      chartData: newState,
+      currentData: newState.currentData,
+      voltageData: newState.voltageData,
+      tempData: newState.tempData,
+    })
 
-    function getRandomInt(max) {
-      return Math.floor(Math.random() * max);
-    }
-    const { labels } = this.state.currentData;
-
-    this.interval = setInterval(() => {
-      /* Call the Polling API */
-      const newState = {
-        currentData:{
-          labels,
-          datasets: [
-          {
-            label: 'Pha A',
-            data: labels.map(() => getRandomInt(1000)),
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgb(255, 99, 132)',
-            fill: false,
-          },
-          {
-            label: 'Pha B',
-            data: labels.map(() => getRandomInt(1000)),
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgb(53, 162, 235)',
-            fill: false,
-          },
-          {
-            label: 'Pha C',
-            data: labels.map(() => getRandomInt(1000)),
-            borderColor: 'rgb(53, 235, 59)',
-            backgroundColor: 'rgb(53, 235, 59)',
-            fill: false,
-          },
-          ]
-        },
-        voltageData:{
-          labels,
-          datasets: [
-          {
-            label: 'Pha A',
-            data: labels.map(() => getRandomInt(1000)),
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgb(255, 99, 132)',
-            fill: false,
-          },
-          {
-            label: 'Pha B',
-            data: labels.map(() => getRandomInt(1000)),
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgb(53, 162, 235)',
-            fill: false,
-          },
-          {
-            label: 'Pha C',
-            data: labels.map(() => getRandomInt(1000)),
-            borderColor: 'rgb(53, 235, 59)',
-            backgroundColor: 'rgb(53, 235, 59)',
-            fill: false,
-          },
-          ]
-        },
-        tempData:{
-          labels,
-          datasets: [
-          {
-            label: 'Nhiệt độ tủ điện',
-            data: labels.map(() => getRandomInt(1000)),
-            borderColor: 'rgb(255, 0, 0)',
-            backgroundColor: 'rgb(255, 0, 0)',
-            fill: false,
-          }
-          ]
-        }
-      }
+    this.interval = setInterval(async () => {
+      /* Call the Polling API every 5 seconds */
+      newState = await pollingAPI();
+      // console.log(newState);
       this.setState({ 
         chartData: newState,
         currentData: newState.currentData,
         voltageData: newState.voltageData,
         tempData: newState.tempData,
       })
-    }, 2000);
+    }, 5000);
   }
 
   render(){
