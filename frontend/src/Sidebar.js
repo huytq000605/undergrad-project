@@ -1,8 +1,10 @@
-import { Sidenav, Nav, Dropdown, Toggle } from "rsuite";
+import { Sidenav, Dropdown, Toggle } from "rsuite";
+import Nav from "rsuite/Nav"
 import GearIcon from "@rsuite/icons/Gear";
 import DashboardIcon from "@rsuite/icons/Dashboard";
 import SingleSourceIcon from "@rsuite/icons/SingleSource";
 import OperatePeopleIcon from "@rsuite/icons/OperatePeople";
+import MediaIcon from '@rsuite/icons/Media';
 import PageIcon from "@rsuite/icons/Page";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react"
@@ -18,9 +20,9 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 	);
 
 	return (
-		<div style={{ height: "100%", display: "flex", flexDirection:"column" }}>
+		<div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
 			<Sidenav
-				defaultOpenKeys={["Nhà máy điện", "4"]}
+				defaultOpenKeys={["Nhà máy điện"]}
 				expanded={expanded}
 				activeKey="1"
 				style={{
@@ -28,7 +30,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 					flexDirection: "column",
 					height: "100%",
 				}}
-        onSelect={setActiveKey}
+				onSelect={setActiveKey}
 			>
 				<Sidenav.Body style={{ height: "100%" }}>
 					<Nav style={{ height: "100%" }}>
@@ -41,58 +43,40 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 						>
 							Trang chủ
 						</Nav.Item>
-						{/* <Nav.Item
-						eventKey="2"
-						icon={<DashboardIcon />}
-					>
-						Thông số
-					</Nav.Item> */}
-						<Dropdown
-							eventKey="Nhà máy điện"
-							title="Nhà máy điện"
-							icon={<SingleSourceIcon />}
-							trigger="click"
-						>
+						<Nav.Menu title="Nhà máy điện" icon={<SingleSourceIcon />} open>
 							{["Đống Đa", "Hai Bà Trưng", "Ba Đình", "Hoàn Kiếm"].map(
 								(name, idx) => {
 									return (
-										<Dropdown.Item
-											key={idx}
-											eventKey={`Nhà máy quận ${name}`}
-											icon={<OperatePeopleIcon />}
-											onClick={() => {
-												handleLink("statistics");
-											}}
+										<Nav.Menu
+											eventKey={`Quận ${name}`}
+											title={` Quận ${name}`}
+											key={name}
+											icon={<MediaIcon />}
 										>
-											Nhà máy quận {`${name}`}
-										</Dropdown.Item>
+											<Nav.Item
+												key={idx}
+												icon={<OperatePeopleIcon />}
+												onClick={() => {
+													handleLink("statistics");
+												}}
+											>
+												Thông số
+											</Nav.Item>
+											<Nav.Item
+												icon={<DashboardIcon />}
+												eventKey="Đồ thị"
+												key="Đồ thị"
+												onClick={() => {
+													handleLink("graph", { location: `quận ${name}` });
+												}}
+											>
+												Đồ thị
+											</Nav.Item>
+										</Nav.Menu>
 									);
 								}
 							)}
-						</Dropdown>
-						<Dropdown
-							eventKey="Đồ thị trực tuyến"
-							title="Đồ thị trực tuyến"
-							icon={<DashboardIcon />}
-							trigger="click"
-						>
-							{["Đống Đa", "Hai Bà Trưng", "Ba Đình", "Hoàn Kiếm"].map(
-								(name, idx) => {
-									return (
-										<Dropdown.Item
-											eventKey={`Đồ thị nhà máy quận ${name}`}
-											key={idx}
-											icon={<OperatePeopleIcon />}
-											onClick={() => {
-												handleLink("graph", { location: `quận ${name}` });
-											}}
-										>
-											Nhà máy quận {`${name}`}
-										</Dropdown.Item>
-									);
-								}
-							)}
-						</Dropdown>
+						</Nav.Menu>
 						<Nav.Item
 							eventKey="Cài đặt"
 							icon={<GearIcon />}
@@ -105,6 +89,6 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 					</Nav>
 				</Sidenav.Body>
 			</Sidenav>
-			</div>
+		</div>
 	);
 };
