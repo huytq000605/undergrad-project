@@ -43,7 +43,14 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 						>
 							Trang chủ
 						</Nav.Item>
-						<Nav.Menu title="Nhà máy điện" icon={<SingleSourceIcon />} open>
+						<Nav.Menu
+							title="Nhà máy điện"
+							icon={<SingleSourceIcon />}
+							onOpen={(event) => {
+								setActiveKey("Nhà máy điện")
+							}}
+							open
+						>
 							{["Đống Đa", "Hai Bà Trưng", "Ba Đình", "Hoàn Kiếm"].map(
 								(name, idx) => {
 									return (
@@ -56,7 +63,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 											<Nav.Item
 												key={idx}
 												icon={<OperatePeopleIcon />}
-												onClick={() => {
+												onClick={(event) => {
 													handleLink("statistics");
 												}}
 											>
