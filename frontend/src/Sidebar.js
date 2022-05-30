@@ -79,6 +79,16 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 											>
 												Đồ thị
 											</Nav.Item>
+											<Nav.Item
+												icon={<DashboardIcon />}
+												eventKey="Độ tin cậy"
+												key="Độ tin cậy"
+												onClick={() => {
+													handleLink("analysis");
+												}}
+											>
+												Độ tin cậy
+											</Nav.Item>
 										</Nav.Menu>
 									);
 								}

@@ -15,6 +15,7 @@ import { Graph } from "./Graph";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Header";
 import { useEffect, useCallback, useState } from "react";
+import { Analysis } from "Analysis";
 
 function App() {
 	const onContentRefChange = useCallback((ref) => {
@@ -79,6 +80,7 @@ function App() {
 							<Route path="/" element={<Statistics />} />
 							<Route path="/statistics" element={<Statistics />} />
 							<Route path="/graph" element={<Graph state={useLocation().state}/>} />
+							<Route path="/analysis" element={<Analysis />} />
 						</Routes>
 					</FlexboxGrid.Item>
 				</FlexboxGrid>
