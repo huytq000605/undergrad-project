@@ -1,52 +1,89 @@
 import { Container } from "rsuite";
 import { Container as GridContainer, Row, Col, Form } from "react-bootstrap";
-import { StatisticComponent } from "./Statistics/StatisticComponent";
-import { EnergyConsume } from "./Statistics/EnergyConsume";
-import { Electric } from "./Statistics/Electric";
-import { Environment } from "Statistics/Environment";
+import { useState, useEffect } from "react"
+import { api } from "shared/api"
 
 export const Analysis = () => {
-	const testData = [];
-	for (let i = 1; i <= 36; i++) {
-		testData.push(i);
-	}
+	const [data, setData] = useState({})
+	useEffect(() => {
+		const getResponse = async () => {
+			const res = await api("trust")
+			const json = await res.json()
+			setData(json)
+		}
+		getResponse()
+		const interval = setInterval(() => {
+			getResponse()
+		}, 5000)
 
-	const result = [];
-	while (testData.length) {
-		result.push(testData.splice(0, 12));
-	}
-
-	console.log("result:", result);
+		return () => clearInterval(interval)
+	}, [])
 
 	return (
 		<Container>
 			<Form>
 				<GridContainer fluid>
-					<Row>
-						{result.map((data, index) => (
+						{new Array(12).fill(0).map((_, idx) => (
+						<Row>
 							<Col>
-								{data.map((x) => (
-									<Form.Group
-										key={x}
-										as={Row}
-										className="mb-1"
-										controlId="formPlaintextEmail"
-									>
-										<Form.Label column sm="6" className="text-end">
-											Title:
-										</Form.Label>
-										<Col sm="3">
-											<Form.Control
-												className="px-1 py-1"
-												readOnly
-												defaultValue={x}
-											/>
-										</Col>
-									</Form.Group>
-								))}
+								<Form.Group
+									key={"ABC"}
+									as={Row}
+									className="mb-1"
+									controlId="formPlaintextEmail"
+								>
+									<Form.Label column sm="6" className="text-end">
+										SAIDI {`${idx + 1}`}
+									</Form.Label>
+									<Col sm="3">
+										<Form.Control
+											className="px-1 py-1"
+											readOnly
+											value={data?.[idx]?.['saidi'] || 0}
+										/>
+									</Col>
+								</Form.Group>
 							</Col>
+							<Col>
+								<Form.Group
+									key={"ABC"}
+									as={Row}
+									className="mb-1"
+									controlId="formPlaintextEmail"
+								>
+									<Form.Label column sm="6" className="text-end">
+										SAIFI {`${idx + 1}`}
+									</Form.Label>
+									<Col sm="3">
+										<Form.Control
+											className="px-1 py-1"
+											readOnly
+											value={data?.[idx]?.['saidi'] || 0}
+										/>
+									</Col>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group
+									key={"ABC"}
+									as={Row}
+									className="mb-1"
+									controlId="formPlaintextEmail"
+								>
+									<Form.Label column sm="6" className="text-end">
+										MAIFI {`${idx + 1}`}
+									</Form.Label>
+									<Col sm="3">
+										<Form.Control
+											className="px-1 py-1"
+											readOnly
+											value={data?.[idx]?.['saidi'] || 0}
+										/>
+									</Col>
+								</Form.Group>
+							</Col>
+						</Row>
 						))}
-					</Row>
 				</GridContainer>
 			</Form>
 		</Container>

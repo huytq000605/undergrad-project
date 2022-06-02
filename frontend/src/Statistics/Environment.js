@@ -11,7 +11,7 @@ export const Environment = () => {
 	return (
 			<Card className="mx-1 mt-2">
 				<Card.Header className="px-1 py-1" style={{ width: "100%", textTransform: "uppercase" }}>
-					{`Các thông số tiêu thụ điện năng`}
+					{`Các thông số môi trường`}
 				</Card.Header>
 				<Card.Body className="px-2 py-2" style={{}}>
 					<Form>

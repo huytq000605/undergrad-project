@@ -78,13 +78,13 @@ export const StatisticComponent = ({name}) => {
 										controlId="formPlaintextEmail"
 									>
 										<Form.Label column sm="6" className="text-end">
-											{`Cos alpha pha ${name}`}
+											{`Cos φ pha ${name}`}
 										</Form.Label>
 										<Col sm="3">
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												value={data['cos_alpha'] || 0}
+												value={data['cos_phi'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">

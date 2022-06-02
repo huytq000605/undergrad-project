@@ -6,6 +6,8 @@ import SingleSourceIcon from "@rsuite/icons/SingleSource";
 import OperatePeopleIcon from "@rsuite/icons/OperatePeople";
 import MediaIcon from '@rsuite/icons/Media';
 import PageIcon from "@rsuite/icons/Page";
+import FunnelIcon from '@rsuite/icons/Funnel';
+import InfoOutlineIcon from '@rsuite/icons/InfoOutline';
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react"
 
@@ -80,7 +82,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 												Đồ thị
 											</Nav.Item>
 											<Nav.Item
-												icon={<DashboardIcon />}
+												icon={<FunnelIcon />}
 												eventKey="Độ tin cậy"
 												key="Độ tin cậy"
 												onClick={() => {
@@ -88,6 +90,16 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 												}}
 											>
 												Độ tin cậy
+											</Nav.Item>
+											<Nav.Item
+												icon={<InfoOutlineIcon />}
+												eventKey="Cảnh báo"
+												key="Cảnh báo"
+												onClick={() => {
+													handleLink("warning");
+												}}
+											>
+												Cảnh báo
 											</Nav.Item>
 										</Nav.Menu>
 									);
