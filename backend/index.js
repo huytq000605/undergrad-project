@@ -97,6 +97,18 @@ app.get("/3-pha/graph", async (req, res) => {
     });
 });
 
+app.get("warning", async (req, res) => {
+  res.json({
+    new Array(12).fill(0).map(() => {
+      if(Math.random()) {
+        return true
+      } else {
+        return false
+      }
+    })
+  })
+}
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });

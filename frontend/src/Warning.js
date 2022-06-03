@@ -33,16 +33,16 @@ export const Warning = () => {
 								return (
 									<Row style={{ marginBottom: "10px" }}>
 										<Col sm={6}>{name}</Col>
-										<Col>
+										<Col sm={3}>
 											<Toggle
-												style={{ marginLeft: "6px", marginRight: "5px" }}
+												style={{ marginLeft: "6px", marginRight: "6px" }}
 												size="lg"
 												checkedChildren=""
 												unCheckedChildren=""
 												checked={randomValue ? false : true}
 											/>
 										</Col>
-										<Col>{randomValue ? "[KHÔNG]" : "[CÓ]"}</Col>
+										<Col sm={3}>{randomValue ? "[KHÔNG]" : "[CÓ]"}</Col>
 									</Row>
 								);
 
