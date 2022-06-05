@@ -77,7 +77,7 @@ class Chart extends Component{
           options={{
             title:{
               display:this.props.displayTitle,
-              text:'Thông số nhiệt độ tại nhà máy ' + this.props.location,
+              text:'Thông số môi trường tại nhà máy ' + this.props.location,
               fontSize:25
             },
             legend:{

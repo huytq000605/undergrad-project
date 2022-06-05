@@ -2,6 +2,7 @@ const polling = async () => {
     try {
         const rawData = await(await fetch("http://localhost:4000/3-pha/graph", {method: "GET"})).json();
         const labels = rawData.pha_a.time;
+        const envLabels = rawData.moi_truong.time;
         return {
             currentData:{
               labels,
@@ -56,13 +57,20 @@ const polling = async () => {
               ]
             },
             tempData:{
-              labels,
+              labels: envLabels,
               datasets: [
                 {
                   label: 'Nhiệt độ tủ điện',
-                  data: rawData.nhiet_do,
+                  data: rawData.moi_truong.nhiet_do,
                   borderColor: 'rgb(255, 0, 0)',
                   backgroundColor: 'rgb(255, 0, 0)',
+                  fill: false,
+                },
+                {
+                  label: 'Độ ẩm tủ điện',
+                  data: rawData.moi_truong.do_am,
+                  borderColor: 'rgb(0,0,255)',
+                  backgroundColor: 'rgb(0,0,255)',
                   fill: false,
                 }
               ]

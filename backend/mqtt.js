@@ -38,7 +38,11 @@ mqttClient.on('message', async (topic, message) => {
 		}, phaC = {
 			created_at: time,
 			updated_at: time,
-		}
+		},
+		env = {
+			created_at: time,
+			updated_at: time,
+		};
 		// save data
 		const receivedData = message.split('_');
 		{
@@ -77,6 +81,12 @@ mqttClient.on('message', async (topic, message) => {
 			phaB.cong_suat_phan_khang = Number(congSuatPhanKhangData[1]);
 			phaC.cong_suat_phan_khang = Number(congSuatPhanKhangData[2]);
 		}
+		{
+			const thongSoMoiTruongData = receivedData[6].split('-');
+			env.nhiet_do = Number(thongSoMoiTruongData[0]);
+			env.do_am = Number(thongSoMoiTruongData[1]);
+		}
+		
 
 		knex('chi_so_pha_a').insert({...phaA})
 		.then(()=>{
@@ -91,6 +101,11 @@ mqttClient.on('message', async (topic, message) => {
 		knex('chi_so_pha_c').insert({...phaC})
 		.then(()=>{
 			console.log("Inserted to chi_so_pha_c table: ", phaC);
+		});
+
+		knex('thong_so_moi_truong').insert({...env})
+		.then(()=>{
+			console.log("Inserted to thong_so_moi_truong table: ", env);
 		});
 
 		// detect power-off

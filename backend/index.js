@@ -69,14 +69,16 @@ app.get("/3-pha", async (req, res) => {
 });
 
 app.get("/3-pha/graph", async (req, res) => {
-    const [pha_a, pha_b, pha_c] = await Promise.all([
+    const [pha_a, pha_b, pha_c, moi_truong] = await Promise.all([
         knex("chi_so_pha_a").orderBy("id", "desc").limit(30),
         knex("chi_so_pha_b").orderBy("id", "desc").limit(30),
         knex("chi_so_pha_c").orderBy("id", "desc").limit(30),
+        knex("thong_so_moi_truong").orderBy("id", "desc").limit(30),
     ]);
     pha_a.reverse();
     pha_b.reverse();
     pha_c.reverse();
+    moi_truong.reverse();
     return res.json({
         pha_a: {
             dong_dien: pha_a.map((element) => element.dong_dien),
@@ -93,7 +95,11 @@ app.get("/3-pha/graph", async (req, res) => {
             dien_ap: pha_c.map((element) => element.dien_ap),
             time: pha_c.map((element) => element.created_at),
         },
-        nhiet_do: new Array(30).fill(60), // fake data
+        moi_truong: {
+            nhiet_do: moi_truong.map((element) => element.nhiet_do),
+            do_am: moi_truong.map((element) => element.do_am),
+            time: moi_truong.map((element) => element.created_at),
+        }
     });
 });
 

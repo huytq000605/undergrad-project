@@ -103,5 +103,14 @@ if (!await knex.schema.hasTable('thong_so_mat_dien')) {
 	  });
 }
 
+if (!await knex.schema.hasTable('thong_so_moi_truong')) {
+	await knex.schema.createTable('thong_so_moi_truong', function (table) {
+		table.increments();
+		  table.specificType('nhiet_do', 'double precision')
+		  table.specificType('do_am', 'double precision')
+		  table.timestamps(true, true)
+	  });
+}
+
 console.log("DONE")
 process.exit(0)
