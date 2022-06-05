@@ -99,7 +99,7 @@ app.get("/3-pha/graph", async (req, res) => {
 
 app.get("warning", async (req, res) => {
   res.json({
-    new Array(12).fill(0).map(() => {
+    data: new Array(12).fill(0).map(() => {
       if(Math.random()) {
         return true
       } else {
@@ -107,7 +107,7 @@ app.get("warning", async (req, res) => {
       }
     })
   })
-}
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
