@@ -60,17 +60,17 @@ const polling = async () => {
               labels: envLabels,
               datasets: [
                 {
-                  label: 'Nhiệt độ tủ điện',
+                  label: 'Nhiệt độ tủ điện(°C)',
                   data: rawData.moi_truong.nhiet_do,
                   borderColor: 'rgb(255, 0, 0)',
                   backgroundColor: 'rgb(255, 0, 0)',
                   fill: false,
                 },
                 {
-                  label: 'Độ ẩm tủ điện',
+                  label: 'Độ ẩm tủ điện(%)',
                   data: rawData.moi_truong.do_am,
-                  borderColor: 'rgb(0,0,255)',
-                  backgroundColor: 'rgb(0,0,255)',
+                  borderColor: 'rgb(0, 51, 153)',
+                  backgroundColor: 'rgb(0, 51, 153)',
                   fill: false,
                 }
               ]
