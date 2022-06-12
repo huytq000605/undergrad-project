@@ -100,6 +100,11 @@ if (!await knex.schema.hasTable('thong_so_mat_dien')) {
 		table.increments();
 		  table.timestamp('start')
 		  table.timestamp('end')
+		  table.integer('minutes')
+		  table.integer('check_times').defaultTo(1)
+		  table.integer('year')
+		  table.integer('month')
+		  table.integer('date')
 	  });
 }
 

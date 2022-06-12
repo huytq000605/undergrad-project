@@ -27,6 +27,7 @@ mqttClient.on('message', async (topic, message) => {
 	console.log("Receiving messages from topic " + topic + message);
 	message = message.toString()
 	// Todo: Handle logic here
+	// "10-5-7_1-3-5_0-0-0_0-0-0_0-0-0_0-0-0_37.7-40.5"
 	if (topic === receiveTopic) {
 		const time = new Date();
 		let phaA = {
@@ -109,30 +110,54 @@ mqttClient.on('message', async (topic, message) => {
 		});
 
 		// detect power-off
-		if ((phaA.dong_dien <= 0.5 && phaA.dien_ap <= 5) ||
-			(phaB.dong_dien <= 0.5 && phaB.dien_ap <= 5) ||
-			(phaC.dong_dien <= 0.5 && phaC.dien_ap <= 5)) {
+		const powerOffCheckTimes = 2;
+		const powerOffVolgate = 5;
+		const powerOffCurrent = 0.5;
+		if ((phaA.dong_dien <= powerOffCurrent && phaA.dien_ap <= powerOffVolgate) ||
+			(phaB.dong_dien <= powerOffCurrent && phaB.dien_ap <= powerOffVolgate) ||
+			(phaC.dong_dien <= powerOffCurrent && phaC.dien_ap <= powerOffVolgate)) {
 				const data = await knex('thong_so_mat_dien')
 								.havingNull('end')
         						.orderBy('id', 'desc')
         						.first();
 				if (!data) {
-					knex('thong_so_mat_dien').insert({start: time})
+					knex('thong_so_mat_dien').insert({ 
+						start: time, 
+						year: time.getFullYear(), 
+						month: time.getMonth() + 1, 
+						date: time.getDate() 
+					})
 					.then(()=>{
 						console.log("Inserted to thong_so_mat_dien table: ", phaC);
 					});
+					return;
+				} else if (data) {
+					knex('thong_so_mat_dien').update({ check_times: data.check_times + 1 })
+					.where({id: data.id})
+					.then(()=>{
+						console.log("updated check_times to thong_so_mat_dien where id: ", data.id);
+					});
+					return;
 				}
 			} else {
 				const data = await knex('thong_so_mat_dien')
 								.havingNull('end')
         						.orderBy('id', 'desc')
         						.first();
-				if (data) {
-					knex('thong_so_mat_dien').update({end: time})
+				if (data && data.check_times >= powerOffCheckTimes) {
+					const minutes = Math.ceil((time.getTime() - data.start.getTime()) / 60000);
+					knex('thong_so_mat_dien').update({ end: time, minutes })
 					.where({id: data.id})
 					.then(()=>{
 						console.log("updated to thong_so_mat_dien where id: ", data.id);
 					});
+					return;
+				} else if (data && data.check_times < powerOffCheckTimes) {
+					await knex('thong_so_mat_dien')
+					.where('id', data.id)
+					.del();
+					console.log("deleted to thong_so_mat_dien where id: ", data.id);
+					return;
 				}
 			}
 	}

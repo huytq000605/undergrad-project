@@ -115,6 +115,37 @@ app.get("warning", async (req, res) => {
   })
 });
 
+app.get("/do-tin-cay", async (req, res) => {
+    const time = new Date();
+    const data = await knex("thong_so_mat_dien")
+                        .where({ year: time.getFullYear() })
+                        .havingNotNull('end')
+                        .orderBy("start", "asc");
+    const result = [];
+    for (let month = 1; month <= 12; month++) {
+        let saidi = 0, saifi = 0, maifi = 0;
+        const monthRecords = data.filter(record => record.month == month);
+
+        monthRecords.forEach(record => {
+            if (record.minutes < 5) {
+                ++ maifi;
+            } else {
+                ++ saifi;
+                saidi += record.minutes;
+            }
+        });
+        result.push({
+            month,
+            saidi,
+            saifi,
+            maifi,
+        });
+    }
+    res.json({
+        data: result,
+    });
+})
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });

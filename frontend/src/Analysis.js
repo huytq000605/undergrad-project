@@ -7,13 +7,14 @@ export const Analysis = () => {
 	const [data, setData] = useState({})
 	useEffect(() => {
 		const getResponse = async () => {
-			const res = await api("trust")
+			const res = await api("do-tin-cay")
 			const json = await res.json()
-			setData(json)
+			setData(json.data)
 		}
 		getResponse()
 		const interval = setInterval(() => {
-			getResponse()
+			getResponse();
+			console.log(data);
 		}, 5000)
 
 		return () => clearInterval(interval)
@@ -58,7 +59,7 @@ export const Analysis = () => {
 										<Form.Control
 											className="px-1 py-1"
 											readOnly
-											value={data?.[idx]?.['saidi'] || 0}
+											value={data?.[idx]?.['saifi'] || 0}
 										/>
 									</Col>
 								</Form.Group>
@@ -77,7 +78,7 @@ export const Analysis = () => {
 										<Form.Control
 											className="px-1 py-1"
 											readOnly
-											value={data?.[idx]?.['saidi'] || 0}
+											value={data?.[idx]?.['maifi'] || 0}
 										/>
 									</Col>
 								</Form.Group>
