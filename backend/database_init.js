@@ -105,6 +105,7 @@ if (!await knex.schema.hasTable('thong_so_mat_dien')) {
 		  table.integer('year')
 		  table.integer('month')
 		  table.integer('date')
+		  table.string('pha', 1)
 	  });
 }
 
@@ -114,6 +115,16 @@ if (!await knex.schema.hasTable('thong_so_moi_truong')) {
 		  table.specificType('nhiet_do', 'double precision')
 		  table.specificType('do_am', 'double precision')
 		  table.timestamps(true, true)
+	  });
+}
+
+if (!await knex.schema.hasTable('so_luong_khach_hang')) {
+	await knex.schema.createTable('so_luong_khach_hang', function (table) {
+		table.increments();
+			table.integer('pha_a')
+			table.integer('pha_b')
+			table.integer('pha_c')
+			table.integer('total')
 	  });
 }
 
