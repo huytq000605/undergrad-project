@@ -117,28 +117,46 @@ app.get("warning", async (req, res) => {
 
 app.get("/do-tin-cay", async (req, res) => {
     const time = new Date();
+    const { 
+        pha_a: khachHangPhaA, 
+        pha_b: khachHangPhaB, 
+        pha_c: khachHangPhaC, 
+        total: tongSoKhachHang 
+    } = await knex("so_luong_khach_hang")
+                    .orderBy("id", "desc")
+                    .first();
     const data = await knex("thong_so_mat_dien")
                         .where({ year: time.getFullYear() })
                         .havingNotNull('end')
                         .orderBy("start", "asc");
     const result = [];
     for (let month = 1; month <= 12; month++) {
-        let saidi = 0, saifi = 0, maifi = 0;
+        let saidi = 0, saifi = 0, maifi = 0, khachHangMatDien = 0;
         const monthRecords = data.filter(record => record.month == month);
-
         monthRecords.forEach(record => {
+            switch (record.pha) {
+                case 'A':
+                    khachHangMatDien = khachHangPhaA;
+                    break;
+                case 'B':
+                    khachHangMatDien = khachHangPhaB;
+                    break;
+                case 'C':
+                    khachHangMatDien = khachHangPhaC;
+                    break;        
+            }
             if (record.minutes < 5) {
-                ++ maifi;
+                maifi += khachHangMatDien / tongSoKhachHang;
             } else {
-                ++ saifi;
-                saidi += record.minutes;
+                saifi += khachHangMatDien / tongSoKhachHang;
+                saidi += (khachHangMatDien * record.minutes) / tongSoKhachHang;
             }
         });
         result.push({
             month,
-            saidi,
-            saifi,
-            maifi,
+            saidi: saidi.toFixed(3),
+            saifi: saifi.toFixed(3),
+            maifi: maifi.toFixed(3),
         });
     }
     res.json({

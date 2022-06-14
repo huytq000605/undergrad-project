@@ -1,6 +1,12 @@
-import mqtt from 'mqtt'
-import { knex } from './index.js'
-export const mqttClient = mqtt.connect('mqtt://test.mosquitto.org')
+import mqtt from 'mqtt';
+import { knex } from './index.js';
+// mqtt://test.mosquitto.org
+// mqtt://34.101.145.91:1883
+export const mqttClient = mqtt.connect('mqtt://34.101.145.91:1883', {
+	clientId: 'sodua',
+	clean: true,
+	reconnectPeriod: 3000,
+});
 export const receiveTopic = "datn-hust/device";
 export const sendTopic = "datn-hust/web";
 
@@ -113,54 +119,95 @@ mqttClient.on('message', async (topic, message) => {
 		const powerOffCheckTimes = 2;
 		const powerOffVolgate = 5;
 		const powerOffCurrent = 0.5;
-		if ((phaA.dong_dien <= powerOffCurrent && phaA.dien_ap <= powerOffVolgate) ||
-			(phaB.dong_dien <= powerOffCurrent && phaB.dien_ap <= powerOffVolgate) ||
-			(phaC.dong_dien <= powerOffCurrent && phaC.dien_ap <= powerOffVolgate)) {
-				const data = await knex('thong_so_mat_dien')
-								.havingNull('end')
-        						.orderBy('id', 'desc')
-        						.first();
-				if (!data) {
-					knex('thong_so_mat_dien').insert({ 
-						start: time, 
-						year: time.getFullYear(), 
-						month: time.getMonth() + 1, 
-						date: time.getDate() 
-					})
-					.then(()=>{
-						console.log("Inserted to thong_so_mat_dien table: ", phaC);
-					});
-					return;
-				} else if (data) {
-					knex('thong_so_mat_dien').update({ check_times: data.check_times + 1 })
-					.where({id: data.id})
-					.then(()=>{
-						console.log("updated check_times to thong_so_mat_dien where id: ", data.id);
-					});
-					return;
-				}
-			} else {
-				const data = await knex('thong_so_mat_dien')
-								.havingNull('end')
-        						.orderBy('id', 'desc')
-        						.first();
-				if (data && data.check_times >= powerOffCheckTimes) {
-					const minutes = Math.ceil((time.getTime() - data.start.getTime()) / 60000);
-					knex('thong_so_mat_dien').update({ end: time, minutes })
-					.where({id: data.id})
-					.then(()=>{
-						console.log("updated to thong_so_mat_dien where id: ", data.id);
-					});
-					return;
-				} else if (data && data.check_times < powerOffCheckTimes) {
-					await knex('thong_so_mat_dien')
-					.where('id', data.id)
-					.del();
-					console.log("deleted to thong_so_mat_dien where id: ", data.id);
-					return;
-				}
-			}
+		checkingPowerOff(
+			phaA.dong_dien,
+			powerOffCurrent,
+			phaA.dien_ap,
+			powerOffVolgate,
+			powerOffCheckTimes,
+			'A',
+			time
+		);
+		checkingPowerOff(
+			phaB.dong_dien,
+			powerOffCurrent,
+			phaB.dien_ap,
+			powerOffVolgate,
+			powerOffCheckTimes,
+			'B',
+			time
+		);
+		checkingPowerOff(
+			phaC.dong_dien,
+			powerOffCurrent,
+			phaC.dien_ap,
+			powerOffVolgate,
+			powerOffCheckTimes,
+			'C',
+			time
+		);
 	}
 })
+
+/**
+ * Detect power off
+ * @param {float} current
+ * @param {float} powerOffCurrent
+ * @param {float} voltage
+ * @param {float} powerOffVolgate
+ * @param {integer} powerOffCheckTimes
+ * @param {string} pha
+ * @param {Date} time
+ * @returns {null}
+ */
+const checkingPowerOff = async(current, powerOffCurrent, voltage, powerOffVolgate, powerOffCheckTimes, pha, time) => {
+	if (current <= powerOffCurrent && voltage <= powerOffVolgate) {
+		const data = await knex('thong_so_mat_dien')
+								.where({ pha })
+								.havingNull('end')
+        						.orderBy('id', 'desc')
+        						.first();
+		if (!data) {
+			knex('thong_so_mat_dien')
+				.insert({ 
+					start: time, 
+					year: time.getFullYear(), 
+					month: time.getMonth() + 1, 
+					date: time.getDate(),
+					pha
+				})
+				.then(()=>{
+					console.log(`Inserted to thong_so_mat_dien table pha : ${pha}`);
+				});
+		} else if (data) {
+			knex('thong_so_mat_dien').update({ check_times: data.check_times + 1 })
+				.where({id: data.id})
+				.then(()=>{
+					console.log("updated check_times to thong_so_mat_dien where id: ", data.id);
+				});
+		}
+	} else {
+		const data = await knex('thong_so_mat_dien')
+								.where({ pha })
+								.havingNull('end')
+        						.orderBy('id', 'desc')
+        						.first();
+		if (data && data.check_times >= powerOffCheckTimes) {
+			const minutes = Math.ceil((time.getTime() - data.start.getTime()) / 60000);
+			knex('thong_so_mat_dien').update({ end: time, minutes })
+				.where({id: data.id})
+				.then(()=>{
+					console.log("updated to thong_so_mat_dien where id: ", data.id);
+				});
+		} else if (data && data.check_times < powerOffCheckTimes) {
+			knex('thong_so_mat_dien')
+				.where('id', data.id)
+				.del()
+				.then(()=>{
+					console.log("deleted in thong_so_mat_dien where id: ", data.id);
+				});
+		}
+	}
+} 
 
 //export default mqttClient
