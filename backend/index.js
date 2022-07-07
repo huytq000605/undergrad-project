@@ -173,18 +173,22 @@ app.get("/moi-truong", async (req, res) => {
 
 
 app.get("/thong-so-tieu-thu-3-pha", async (req, res) => {
-    const time = 10; // 10s
+    const timeStamp = 10; // 10s
     const [pha_a, pha_b, pha_c] = await Promise.all([
         knex("chi_so_pha_a").orderBy("created_at", "desc").first(),
         knex("chi_so_pha_b").orderBy("created_at", "desc").first(),
         knex("chi_so_pha_c").orderBy("created_at", "desc").first(),
     ]);
+    const dienNang = ((pha_a.cong_suat_hieu_dung + pha_b.cong_suat_hieu_dung + pha_c.cong_suat_hieu_dung) * (timeStamp / 3600)).toFixed(3);
+    const phanKhang = (pha_a.cong_suat_phan_khang + pha_b.cong_suat_phan_khang + pha_c.cong_suat_phan_khang).toFixed(3);
+    const hieuDung = (pha_a.cong_suat_hieu_dung + pha_b.cong_suat_hieu_dung + pha_c.cong_suat_hieu_dung).toFixed(3);
+    const bieuKienTong = Math.sqrt(phanKhang * phanKhang + hieuDung * hieuDung).toFixed(3);
     res.end(
         JSON.stringify({
-            dien_nang_tieu_thu: ((pha_a.cong_suat_hieu_dung + pha_b.cong_suat_hieu_dung + pha_c.cong_suat_hieu_dung) * (time / 3600)).toFixed(3),
-            cong_suat_bieu_kien_tong: (pha_a.cong_suat_dieu_khien + pha_b.cong_suat_dieu_khien + pha_c.cong_suat_dieu_khien).toFixed(3),
-            cong_suat_hieu_dung_tong: (pha_a.cong_suat_hieu_dung + pha_b.cong_suat_hieu_dung + pha_c.cong_suat_hieu_dung).toFixed(3),
-            cong_suat_phan_khang_tong: (pha_a.cong_suat_phan_khang + pha_b.cong_suat_phan_khang + pha_c.cong_suat_phan_khang).toFixed(3)
+            dien_nang_tieu_thu: dienNang,
+            cong_suat_bieu_kien_tong: bieuKienTong,
+            cong_suat_hieu_dung_tong: hieuDung,
+            cong_suat_phan_khang_tong: phanKhang
         })
     );
 });
