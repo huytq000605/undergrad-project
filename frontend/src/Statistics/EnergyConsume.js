@@ -6,8 +6,25 @@ import {
 	Row,
 	Col,
 } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { api } from "../shared/api"
 
 export const EnergyConsume = () => {
+	const [data, setData] = useState({})
+	useEffect(() => {
+		const getResponse = async () => {
+			const res = await api("thong-so-tieu-thu-3-pha")
+			const json = await res.json()
+			setData(json)
+		}
+		getResponse()
+		const interval = setInterval(() => {
+			getResponse()
+		}, 5000)
+
+		return () => clearInterval(interval)
+	}, [])
+
 	return (
 			<Card className="mx-1 mt-2">
 				<Card.Header className="px-1 py-1" style={{ width: "100%", textTransform: "uppercase" }}>
@@ -30,14 +47,14 @@ export const EnergyConsume = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['dien_nang_tieu_thu'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
 											[kWh]
 										</Form.Label>
 									</Form.Group>
-									<Form.Group
+									{/* <Form.Group
 										as={Row}
 										className="mb-1"
 										controlId="formPlaintextEmail"
@@ -49,13 +66,13 @@ export const EnergyConsume = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['pha_a'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
-											[kVARh]
+											[kVAR]
 										</Form.Label>
-									</Form.Group>
+									</Form.Group> */}
 									<Form.Group
 										as={Row}
 										className="mb-1"
@@ -68,7 +85,7 @@ export const EnergyConsume = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['cong_suat_hieu_dung_tong'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -77,7 +94,7 @@ export const EnergyConsume = () => {
 									</Form.Group>
 								</Col>
 								<Col sm={12} md={6}>
-								<Form.Group
+								{/* <Form.Group
 										as={Row}
 										className="mb-1"
 										controlId="formPlaintextEmail"
@@ -89,13 +106,13 @@ export const EnergyConsume = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['pha_a'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
-											[kVAh]
+											[kVA]
 										</Form.Label>
-									</Form.Group>
+									</Form.Group> */}
 									<Form.Group
 										as={Row}
 										className="mb-1"
@@ -108,7 +125,7 @@ export const EnergyConsume = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['cong_suat_bieu_kien_tong'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
@@ -127,7 +144,7 @@ export const EnergyConsume = () => {
 											<Form.Control
 												className="px-1 py-1"
 												readOnly
-												defaultValue="0.00"
+												value={data['cong_suat_phan_khang_tong'] || 0}
 											/>
 										</Col>
 										<Form.Label column sm="3" className="text-start">
