@@ -47,13 +47,24 @@ class Chart extends Component{
           options={{
             title:{
               display:this.props.displayTitle,
-              text:'Thông số dòng điện tại nhà máy ' + this.props.location,
+              text:'Thông số dòng điện (Ampe) tại nhà máy ' + this.props.location,
               fontSize:25
             },
             legend:{
               display:this.props.displayLegend,
               position:this.props.legendPosition
-            }
+            },
+            scales: {
+              yAxes: [{
+                display: true,
+                ticks: {
+                    beginAtZero: true,
+                    steps: 10,
+                    stepValue: 5,
+                    max: 10
+                  }
+                }]
+            },
           }}
         />
 
@@ -62,12 +73,23 @@ class Chart extends Component{
           options={{
             title:{
               display:this.props.displayTitle,
-              text:'Thông số điện áp tại nhà máy ' + this.props.location,
+              text:'Thông số điện áp (Voltage) tại nhà máy ' + this.props.location,
               fontSize:25
             },
             legend:{
               display:this.props.displayLegend,
               position:this.props.legendPosition
+            },
+            scales: {
+              yAxes: [{
+                display: true,
+                ticks: {
+                    beginAtZero: true,
+                    steps: 10,
+                    stepValue: 5,
+                    max: 350
+                }
+              }]
             }
           }}
         />
@@ -83,6 +105,17 @@ class Chart extends Component{
             legend:{
               display:this.props.displayLegend,
               position:this.props.legendPosition
+            },
+            scales: {
+              yAxes: [{
+                display: true,
+                ticks: {
+                    beginAtZero: true,
+                    steps: 10,
+                    stepValue: 5,
+                    max: 100
+                }
+              }]
             }
           }}
         />

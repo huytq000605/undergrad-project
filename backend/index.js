@@ -162,7 +162,14 @@ app.get("/do-tin-cay", async (req, res) => {
     res.json({
         data: result,
     });
-})
+});
+
+app.get("/moi-truong", async (req, res) => {
+    const data = await knex("thong_so_moi_truong")
+        .orderBy("created_at", "desc")
+        .first();
+    res.end(JSON.stringify(data));
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
