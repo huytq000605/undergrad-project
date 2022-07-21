@@ -17,6 +17,8 @@ import Header from "./Header";
 import { useEffect, useCallback, useState } from "react";
 import { Analysis } from "./Analysis";
 import { Warning } from "./Warning";
+import { HomePage } from "./HomePage";
+import { Setting } from "Statistics/Setting";
 
 function App() {
 	const onContentRefChange = useCallback((ref) => {
@@ -79,10 +81,12 @@ function App() {
 					<FlexboxGrid.Item colspan={sidebarExpanded ? 20 : 23}>
 						<Routes>
 							<Route path="/" element={<Statistics />} />
+							<Route path="/home" element={<HomePage />} />
 							<Route path="/statistics" element={<Statistics />} />
 							<Route path="/graph" element={<Graph state={useLocation().state}/>} />
 							<Route path="/analysis" element={<Analysis />} />
 							<Route path="/warning" element={<Warning />} />
+							<Route path="/setting" element={<Setting />} />
 						</Routes>
 					</FlexboxGrid.Item>
 				</FlexboxGrid>

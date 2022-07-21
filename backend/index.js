@@ -68,6 +68,24 @@ app.get("/3-pha", async (req, res) => {
     );
 });
 
+app.post("", async (req, res) => {
+    try {
+        const {
+            id_nha_may,
+            nguong_dien_ap_pha_a_cao,
+            nguong_dien_ap_pha_b_cao,
+            nguong_dien_ap_pha_c_cao,
+            nguong_dien_ap_pha_a_thap,
+            nguong_dien_ap_pha_b_thap,
+            nguong_dien_ap_pha_c_thap
+        } = req.body
+        await knex("cai_dat").insert(req.body)
+        res.status(200).end();
+    } catch (error) {
+        res.status(422).end(error);
+    }
+})
+
 app.get("/3-pha/graph", async (req, res) => {
     const [pha_a, pha_b, pha_c, moi_truong] = await Promise.all([
         knex("chi_so_pha_a").orderBy("id", "desc").limit(30),
