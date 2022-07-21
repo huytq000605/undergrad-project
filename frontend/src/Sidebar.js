@@ -101,20 +101,21 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 											>
 												Cảnh báo
 											</Nav.Item>
+											<Nav.Item
+												icon={<InfoOutlineIcon />}
+												eventKey="Cài đặt"
+												key="Cài đặt"
+												onClick={() => {
+													handleLink("setting");
+												}}
+											>
+												Cài đặt
+											</Nav.Item>
 										</Nav.Menu>
 									);
 								}
 							)}
 						</Nav.Menu>
-						<Nav.Item
-							eventKey="Cài đặt"
-							icon={<GearIcon />}
-							onClick={() => {
-								handleLink("home");
-							}}
-						>
-							Cài đặt
-						</Nav.Item>
 					</Nav>
 				</Sidenav.Body>
 			</Sidenav>
