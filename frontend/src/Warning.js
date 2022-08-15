@@ -27,9 +27,15 @@ export const Warning = () => {
 					<Row>
 						<Col />
 						<Col>
-							{["Điện áp pha A cao", "Điện áp pha B cao", "Điện áp pha C cao", "Quá dòng pha A", "Quá dòng pha B", "Quá dòng pha C", "Tần số thấp", "Độ ẩm cao", "Nhiệt độ cao", "Cos φ pha A thấp", "Cos φ pha B thấp", "Cos φ pha C thấp"].map((name) => {
-
-								const randomValue = Math.random() > 0.5
+							{["Điện áp pha A cao", "Điện áp pha B cao", "Điện áp pha C cao", "Điện áp pha A thấp", "Điện áp pha B thấp", "Điện áp pha C thấp", "Quá dòng pha A", "Quá dòng pha B", "Quá dòng pha C", "Tần số thấp", "Tần số cao", "Độ ẩm cao", "Độ ẩm thấp", "Nhiệt độ cao", "Nhiệt độ thấp", "Cos φ pha A thấp", "Cos φ pha B thấp", "Cos φ pha C thấp", 'Mất điện pha A', 'Mất điện pha B', 'Mất điện pha C'].map((name, index, arr) => {
+								const mapData = new Array(arr.length).fill(false);
+								mapData[1] = true;
+								mapData[1] = true;
+								mapData[1] = true;
+								mapData[13] = true;
+								mapData[5] = true;
+								mapData[6] = true;
+								console.log(mapData);
 								return (
 									<Row style={{ marginBottom: "10px" }}>
 										<Col sm={6}>{name}</Col>
@@ -39,10 +45,10 @@ export const Warning = () => {
 												size="lg"
 												checkedChildren=""
 												unCheckedChildren=""
-												checked={randomValue ? false : true}
+												checked={!mapData[index] ? false : true}
 											/>
 										</Col>
-										<Col sm={3}>{randomValue ? "[KHÔNG]" : "[CÓ]"}</Col>
+										<Col sm={3}>{!mapData[index]? "[KHÔNG]" : "[CÓ]"}</Col>
 									</Row>
 								);
 

@@ -128,5 +128,43 @@ if (!await knex.schema.hasTable('so_luong_khach_hang')) {
 	  });
 }
 
+if (!await knex.schema.hasTable('nguong_canh_bao')) {
+	await knex.schema.createTable('nguong_canh_bao', function (table) {
+		table.increments();
+        table.specificType('dien_ap_pha_a_cao', 'double precision')
+		table.specificType('dien_ap_pha_b_cao', 'double precision')
+        table.specificType('dien_ap_pha_c_cao', 'double precision')
+		table.specificType('dien_ap_pha_a_thap', 'double precision')
+		table.specificType('dien_ap_pha_b_thap', 'double precision')
+		table.specificType('dien_ap_pha_c_thap', 'double precision')
+		table.specificType('qua_dong_pha_a', 'double precision')
+		table.specificType('qua_dong_pha_b', 'double precision')
+		table.specificType('qua_dong_pha_c', 'double precision')
+		table.specificType('tan_so_thap', 'double precision')
+		table.specificType('tan_so_cao', 'double precision')
+		table.specificType('do_am_thap', 'double precision')
+		table.specificType('do_am_cao', 'double precision')
+		table.specificType('nhiet_do_thap', 'double precision')
+		table.specificType('nhiet_do_cao', 'double precision')
+		table.specificType('cos_phi_pha_a_thap', 'double precision')
+		table.specificType('cos_phi_pha_b_thap', 'double precision')
+		table.specificType('cos_phi_pha_c_thap', 'double precision')
+	  });
+}
+
+if (!await knex.schema.hasTable('account')) {
+	await knex.schema.createTable('account', function (table) {
+		table.increments();
+        table.specificType('username', 'string')
+		table.specificType('password', 'string')
+        table.specificType('full_name', 'string')
+		table.specificType('academic_year', 'int')
+		table.specificType('gender', 'boolean')
+		table.specificType('id', 'string')
+		table.specificType('info', 'text')
+		table.specificType('role', 'int')
+	  });
+}
+
 console.log("DONE")
 process.exit(0)

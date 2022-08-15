@@ -4,6 +4,7 @@ import GearIcon from "@rsuite/icons/Gear";
 import DashboardIcon from "@rsuite/icons/Dashboard";
 import SingleSourceIcon from "@rsuite/icons/SingleSource";
 import OperatePeopleIcon from "@rsuite/icons/OperatePeople";
+import SettingIcon from '@rsuite/icons/Setting';
 import MediaIcon from '@rsuite/icons/Media';
 import PageIcon from "@rsuite/icons/Page";
 import FunnelIcon from '@rsuite/icons/Funnel';
@@ -102,7 +103,7 @@ export const Sidebar = ({expanded, setExpanded, activeKey, setActiveKey}) => {
 												Cảnh báo
 											</Nav.Item>
 											<Nav.Item
-												icon={<InfoOutlineIcon />}
+												icon={<SettingIcon />}
 												eventKey="Cài đặt"
 												key="Cài đặt"
 												onClick={() => {
