@@ -71,32 +71,55 @@ app.get("/3-pha", async (req, res) => {
 app.post("/settings/waring", async (req, res) => {
     try {
         const {
-            id_nha_may,
-            nguong_dien_ap_pha_a_cao,
-            nguong_dien_ap_pha_b_cao,
-            nguong_dien_ap_pha_c_cao,
-            nguong_dien_ap_pha_a_thap,
-            nguong_dien_ap_pha_b_thap,
-            nguong_dien_ap_pha_c_thap,
-            nguong_qua_dong_pha_a,
-            nguong_qua_dong_pha_b,
-            nguong_qua_dong_pha_c,
-            nguong_tan_so_thap,
-            nguong_tan_so_cao,
-            nguong_do_am_thap,
-            nguong_do_am_cao,
-            nguong_nhiet_do_thap,
-            nguong_nhiet_do_cao,
-            nguong_cos_phi_pha_a_thap,
-            nguong_cos_phi_pha_b_thap,
-            nguong_cos_phi_pha_c_thap
-        } = req.body
-        await knex("nguong_canh_bao").insert(req.body)
+            dien_ap_pha_a_cao,
+            dien_ap_pha_b_cao,
+            dien_ap_pha_c_cao,
+            dien_ap_pha_a_thap,
+            dien_ap_pha_b_thap,
+            dien_ap_pha_c_thap,
+            qua_dong_pha_a,
+            qua_dong_pha_b,
+            qua_dong_pha_c,
+            tan_so_thap,
+            tan_so_cao,
+            do_am_thap,
+            do_am_cao,
+            nhiet_do_thap,
+            nhiet_do_cao,
+            cos_phi_pha_a_thap,
+            cos_phi_pha_b_thap,
+            cos_phi_pha_c_thap
+        } = req.body;
+        
+        for (const [key, value] of Object.entries(req.body)) {
+            if (!value) {
+                delete req.body[key];
+            } else {
+                req.body[key] = Number(value);
+            }
+        }
+
+        const data = await knex("nguong_canh_bao")
+        .orderBy("id", "desc")
+        .first();
+
+        knex('nguong_canh_bao').update({...req.body}).where({id: data.id})
+				.then(()=>{
+					console.log("updated to nguong_canh_bao where id: ", data.id);
+				});
+        console.log(req.body);
         res.status(200).end();
     } catch (error) {
         res.status(422).end(error);
     }
 })
+
+app.get("/waring-threshold", async (req, res) => {
+    const data = await knex("nguong_canh_bao")
+        .orderBy("id", "desc")
+        .first();
+    res.end(JSON.stringify(data));    
+});
 
 app.get("/3-pha/graph", async (req, res) => {
     const [pha_a, pha_b, pha_c, moi_truong] = await Promise.all([

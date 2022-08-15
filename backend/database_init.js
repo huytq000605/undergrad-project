@@ -152,19 +152,19 @@ if (!await knex.schema.hasTable('nguong_canh_bao')) {
 	  });
 }
 
-if (!await knex.schema.hasTable('account')) {
-	await knex.schema.createTable('account', function (table) {
-		table.increments();
-        table.specificType('username', 'string')
-		table.specificType('password', 'string')
-        table.specificType('full_name', 'string')
-		table.specificType('academic_year', 'int')
-		table.specificType('gender', 'boolean')
-		table.specificType('id', 'string')
-		table.specificType('info', 'text')
-		table.specificType('role', 'int')
-	  });
-}
+// if (!await knex.schema.hasTable('account')) {
+// 	await knex.schema.createTable('account', function (table) {
+// 		table.increments();
+//         table.specificType('username', 'string')
+// 		table.specificType('password', 'string')
+//         table.specificType('full_name', 'string')
+// 		table.specificType('academic_year', 'int')
+// 		table.specificType('gender', 'boolean')
+// 		table.specificType('id', 'string')
+// 		table.specificType('info', 'text')
+// 		table.specificType('role', 'int')
+// 	  });
+// }
 
 console.log("DONE")
 process.exit(0)
