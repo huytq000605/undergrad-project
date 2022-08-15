@@ -18,8 +18,7 @@ export const HomePage = () => {
                                     <h3>Tran Quang Huy</h3>
                                 </div>
                                 <div class="card-body">
-                                    <p class="mb-0"><strong class="pr-1">Student ID:</strong> 20181535</p>
-                                    <p class="mb-0"><strong class="pr-1">CPA:</strong> 3.1</p>
+                                    <p class="mb-0" style={{margin:"auto"}}><strong class="pr-1">User ID:</strong> 20181535</p>
                                 </div>
                             </div>
                         </div>
@@ -34,11 +33,6 @@ export const HomePage = () => {
                                             <th width="30%">Name</th>
                                             <td width="2%">:</td>
                                             <td>Tran Quang Huy</td>
-                                        </tr>
-                                        <tr>
-                                            <th width="30%">Academic Year	</th>
-                                            <td width="2%">:</td>
-                                            <td>2022</td>
                                         </tr>
                                         <tr>
                                             <th width="30%">Gender</th>

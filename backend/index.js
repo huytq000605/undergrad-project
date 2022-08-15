@@ -68,7 +68,7 @@ app.get("/3-pha", async (req, res) => {
     );
 });
 
-app.post("", async (req, res) => {
+app.post("/settings/waring", async (req, res) => {
     try {
         const {
             id_nha_may,
@@ -77,9 +77,21 @@ app.post("", async (req, res) => {
             nguong_dien_ap_pha_c_cao,
             nguong_dien_ap_pha_a_thap,
             nguong_dien_ap_pha_b_thap,
-            nguong_dien_ap_pha_c_thap
+            nguong_dien_ap_pha_c_thap,
+            nguong_qua_dong_pha_a,
+            nguong_qua_dong_pha_b,
+            nguong_qua_dong_pha_c,
+            nguong_tan_so_thap,
+            nguong_tan_so_cao,
+            nguong_do_am_thap,
+            nguong_do_am_cao,
+            nguong_nhiet_do_thap,
+            nguong_nhiet_do_cao,
+            nguong_cos_phi_pha_a_thap,
+            nguong_cos_phi_pha_b_thap,
+            nguong_cos_phi_pha_c_thap
         } = req.body
-        await knex("cai_dat").insert(req.body)
+        await knex("nguong_canh_bao").insert(req.body)
         res.status(200).end();
     } catch (error) {
         res.status(422).end(error);
@@ -121,7 +133,7 @@ app.get("/3-pha/graph", async (req, res) => {
     });
 });
 
-app.get("warning", async (req, res) => {
+app.get("/warning", async (req, res) => {
   res.json({
     data: new Array(12).fill(0).map(() => {
       if(Math.random()) {

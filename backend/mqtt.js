@@ -3,7 +3,7 @@ import { knex } from './index.js';
 // mqtt://test.mosquitto.org
 // mqtt://34.101.145.91:1883
 export const mqttClient = mqtt.connect('mqtt://test.mosquitto.org', {
-	clientId: 'sodua',
+	clientId: 'mba1',
 	clean: true,
 	reconnectPeriod: 3000,
 });
