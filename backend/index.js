@@ -107,7 +107,6 @@ app.post("/settings/waring", async (req, res) => {
 				.then(()=>{
 					console.log("updated to nguong_canh_bao where id: ", data.id);
 				});
-        console.log(req.body);
         res.status(200).end();
     } catch (error) {
         res.status(422).end(error);

@@ -1,22 +1,35 @@
 import { Container } from "rsuite";
 import { Container as GridContainer, Row, Col, Form } from "react-bootstrap";
 import { useState, useEffect } from "react"
-import { api } from "shared/api"
+import { api, convertToWarning } from "shared/api"
 import { Toggle } from "rsuite";
 
 export const Warning = () => {
-	const [data, setData] = useState({})
+	const [data, setData] = useState({});
+	let mapData = new Array(21).fill(false);
 	useEffect(() => {
 		const getResponse = async () => {
-			const res = await api("warning")
-			const json = await res.json()
-			setData(json)
+			let res = await api("waring-threshold")
+			const nguongcanhbao = await res.json();
+			res = await api("thong-so-tieu-thu-3-pha")
+			const thongsotieuthu = await res.json()
+			res = await api("pha-a")
+			const phaA = await res.json()
+			res = await api("pha-b")
+			const phaB = await res.json()
+			res = await api("pha-c")
+			const phaC = await res.json()
+			res = await api("moi-truong")
+			const thongsomoitruong = await res.json();
+			mapData = convertToWarning({nguongcanhbao, phaA, phaB, phaC, thongsomoitruong, thongsotieuthu});
+			setData(mapData);
 		}
 		getResponse()
 		const interval = setInterval(() => {
 			getResponse()
-		}, 5000)
+		}, 10000)
 
+		console.log(data);
 		return () => clearInterval(interval)
 	}, [])
 
@@ -28,14 +41,6 @@ export const Warning = () => {
 						<Col />
 						<Col>
 							{["Điện áp pha A cao", "Điện áp pha B cao", "Điện áp pha C cao", "Điện áp pha A thấp", "Điện áp pha B thấp", "Điện áp pha C thấp", "Quá dòng pha A", "Quá dòng pha B", "Quá dòng pha C", "Tần số thấp", "Tần số cao", "Độ ẩm cao", "Độ ẩm thấp", "Nhiệt độ cao", "Nhiệt độ thấp", "Cos φ pha A thấp", "Cos φ pha B thấp", "Cos φ pha C thấp", 'Mất điện pha A', 'Mất điện pha B', 'Mất điện pha C'].map((name, index, arr) => {
-								const mapData = new Array(arr.length).fill(false);
-								mapData[1] = true;
-								mapData[1] = true;
-								mapData[1] = true;
-								mapData[13] = true;
-								mapData[5] = true;
-								mapData[6] = true;
-								console.log(mapData);
 								return (
 									<Row style={{ marginBottom: "10px" }}>
 										<Col sm={6}>{name}</Col>
@@ -45,10 +50,10 @@ export const Warning = () => {
 												size="lg"
 												checkedChildren=""
 												unCheckedChildren=""
-												checked={!mapData[index] ? false : true}
+												checked={!data[index] ? false : true}
 											/>
 										</Col>
-										<Col sm={3}>{!mapData[index]? "[KHÔNG]" : "[CÓ]"}</Col>
+										<Col sm={3}>{!data[index]? "[KHÔNG]" : "[CÓ]"}</Col>
 									</Row>
 								);
 
