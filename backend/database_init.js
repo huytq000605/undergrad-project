@@ -125,7 +125,17 @@ if (!await knex.schema.hasTable('so_luong_khach_hang')) {
 			table.integer('pha_b')
 			table.integer('pha_c')
 			table.integer('total')
-	  });
+	  }).then(function () {
+		const initData = {
+			pha_a: 2000,
+			pha_b: 3000,
+			pha_c: 5000,
+			total: 10000
+		}
+		return knex("so_luong_khach_hang").insert(
+			[initData]
+		);
+	});
 }
 
 if (!await knex.schema.hasTable('nguong_canh_bao')) {
