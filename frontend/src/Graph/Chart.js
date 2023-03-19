@@ -39,6 +39,10 @@ class Chart extends Component{
     }, 5000);
   }
 
+	componentWillUnmount() {
+		clearInterval(this.interval);
+	}
+
   render(){
     return (
       <div className="chart">
